@@ -14,6 +14,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Light모드로만 진행
+        if #available(iOS 13.0, *) {
+            self.window?.overrideUserInterfaceStyle = .light
+        }
+        
+        let navigation = UINavigationController()
+        navigation.setNavigationBarHidden(true, animated: false)
+        if (Defaults.array(forKey: UD_REGI_LOCATION_LIST)?.count) ?? 0 > 0 {
+            if let weatherVC = viewController(type: WeatherVC.self) {
+                navigation.setViewControllers([weatherVC], animated: false)
+            }
+        } else {
+            if let locationVC = viewController(type: LocationVC.self) {
+                navigation.setViewControllers([locationVC], animated: false)
+            }
+        }
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
+        window?.rootViewController = navigation
+        
         return true
     }
     

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="I5X-h2-VxX" customClass="WeatherCenterCell" customModule="TestWeather" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I5X-h2-VxX" id="WtL-J1-hNy">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NVN-Fr-B95" userLabel="Line">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
+                        <color key="backgroundColor" white="1" alpha="0.60092787114845936" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="bLr-vK-knr"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" id="iN0-l3-epB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="IBc-PO-sUb">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="K2Z-no-5zG">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                            </collectionView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="IBc-PO-sUb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0qQ-Pg-0Am"/>
+                            <constraint firstAttribute="trailing" secondItem="IBc-PO-sUb" secondAttribute="trailing" id="5ba-h4-04z"/>
+                            <constraint firstItem="IBc-PO-sUb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Alh-yh-6f4"/>
+                            <constraint firstAttribute="bottom" secondItem="IBc-PO-sUb" secondAttribute="bottom" id="ehZ-Ky-m0K"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P25-SM-eac" userLabel="Line">
+                        <rect key="frame" x="0.0" y="99" width="414" height="1"/>
+                        <color key="backgroundColor" white="1" alpha="0.60092787110000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="IQl-yM-FG4"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="NVN-Fr-B95" firstAttribute="top" secondItem="WtL-J1-hNy" secondAttribute="top" id="0LO-RI-v31"/>
+                    <constraint firstAttribute="trailing" secondItem="NVN-Fr-B95" secondAttribute="trailing" id="TZn-m3-6G5"/>
+                    <constraint firstAttribute="trailing" secondItem="P25-SM-eac" secondAttribute="trailing" id="aQs-Fz-TsL"/>
+                    <constraint firstItem="NVN-Fr-B95" firstAttribute="leading" secondItem="WtL-J1-hNy" secondAttribute="leading" id="fNL-Xa-yHA"/>
+                    <constraint firstAttribute="bottom" secondItem="P25-SM-eac" secondAttribute="bottom" id="lQC-4w-y1X"/>
+                    <constraint firstItem="P25-SM-eac" firstAttribute="leading" secondItem="WtL-J1-hNy" secondAttribute="leading" id="leM-I7-pdU"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="cvHorizontalWeather" destination="IBc-PO-sUb" id="F7E-h4-Wf1"/>
+            </connections>
+            <point key="canvasLocation" x="-100" y="251"/>
+        </tableViewCell>
+    </objects>
+</document>

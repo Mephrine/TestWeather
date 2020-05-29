@@ -14,3 +14,21 @@ public func p(_ items: Any...) {
     Swift.print(output, terminator: "\n")
     #endif
 }
+
+public let Defaults = UserDefaults.standard
+
+class Utils: NSObject {
+    public static let SCREEN_WIDTH = UIScreen.main.bounds.size.width
+    public static let SCREEN_HEIGHT = UIScreen.main.bounds.size.height
+    public static let STATUS_HEIGHT = UIApplication.shared.statusBarFrame.size.height
+    
+    static func addLocation(cityNm: String? = "", latitude: Double, longitude: Double) {
+        var array = Defaults.array(forKey: UD_REGI_LOCATION_LIST)
+        if array == nil {
+            array = [[String: Any]]()
+        }
+        
+        array?.append(["city": cityNm ?? "", "lat": latitude, "lon": longitude])
+        Defaults.setValue(array, forKey: UD_REGI_LOCATION_LIST)
+    }
+}

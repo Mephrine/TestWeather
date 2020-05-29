@@ -8,13 +8,16 @@
 
 import UIKit
 
-class MainVC: UIViewController {
-
+class MainVC: BaseVC {
+    //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
+    
+    //MARK: - e.g.
+    
+    
+    //MARK: - Action
 
 }
-
