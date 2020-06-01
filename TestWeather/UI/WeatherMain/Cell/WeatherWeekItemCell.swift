@@ -8,7 +8,12 @@
 
 import UIKit
 
-class WeatherWeekItemCell: BaseTableViewCell, BaseCellProtocol {
+class WeatherWeekItemCell: BaseTableViewCell {
+    @IBOutlet weak var lbDay: UILabel!
+    @IBOutlet weak var lbHighTemp: UILabel!
+    @IBOutlet weak var lbLowTemp: UILabel!
+    @IBOutlet weak var ivIcon: UIImageView!
+    
     func configuration() {
         
     }

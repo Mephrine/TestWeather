@@ -8,10 +8,10 @@
 
 import UIKit
 
-class WeatherDescCell: BaseTableViewCell, BaseCellProtocol {
+class WeatherDescCell: BaseCollectionViewCell {
     @IBOutlet weak var lbDesc: UILabel!
     
-    func configuration() {
+    func configuration(item: WeatherDescModel) {
         
     }
 }

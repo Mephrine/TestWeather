@@ -1,5 +1,5 @@
 //
-//  WeatherCenterCell.swift
+//  WeatherHeaderView.swift
 //  TestWeather
 //
 //  Created by Mephrine on 2020/05/29.
@@ -8,17 +8,27 @@
 
 import UIKit
 
-class WeatherCenterCell: BaseTableViewCell {
+class WeatherHeaderView: UICollectionReusableView {
+    @IBOutlet weak var lbCity: UILabel!
+    @IBOutlet weak var lbWeather: UILabel!
+    @IBOutlet weak var lbTemp: UILabel!
+    @IBOutlet weak var lbDay: UILabel!
+    @IBOutlet weak var lbTime: UILabel!
+    @IBOutlet weak var lbHighTemp: UILabel!
+    @IBOutlet weak var lbLowTemp: UILabel!
+    @IBOutlet weak var vCenterView: UIView!
     @IBOutlet weak var cvHorizontalWeather: UICollectionView!
+    @IBOutlet weak var constBgH: NSLayoutConstraint!
     
     private let itemCell    = "WeatherCenterItemCell"
-    var itemList = [WeatherCenterModel]()
+    var item: WeatherHeaderModel?
     
     override func awakeFromNib() {
+        constBgH.constant = Utils.SCREEN_HEIGHT
+        
         self.cvHorizontalWeather.dataSource = self
         self.cvHorizontalWeather.delegate   = self
         self.cvHorizontalWeather.register(UINib(nibName: itemCell, bundle: nil), forCellWithReuseIdentifier: itemCell)
-        self.cvHorizontalWeather.isScrollEnabled = false
         
         if let flowLayout = cvHorizontalWeather.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.scrollDirection = .horizontal
@@ -28,13 +38,26 @@ class WeatherCenterCell: BaseTableViewCell {
         }
     }
     
-    func configuration(item: [WeatherCenterModel]) {
-        self.itemList = item
+    func configuration(item: WeatherHeaderModel) {
+        self.item = item
+        self.lbCity.text = item.city
+        self.lbWeather.text = item.weather
+        self.lbTemp.text = item.temp
+        self.lbDay.text = item.day
+        self.lbTime.text = item.time
+        self.lbHighTemp.text = item.highTemp
+        self.lbLowTemp.text = item.lowTemp
+        
         self.cvHorizontalWeather.reloadData()
+    }
+    
+    func animScrollFade() {
+        //TODO: - vCenterView, lbTemp에 적용 필요.
     }
 }
 
-extension WeatherCenterCell: UICollectionViewDelegate, UICollectionViewDataSource {
+
+extension WeatherHeaderView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
     }
@@ -47,6 +70,4 @@ extension WeatherCenterCell: UICollectionViewDelegate, UICollectionViewDataSourc
         
         return UICollectionViewCell()
     }
-    
-    
 }

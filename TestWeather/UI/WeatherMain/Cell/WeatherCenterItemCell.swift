@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WeatherCenterItemCell: UICollectionViewCell, BaseCellProtocol {
+class WeatherCenterItemCell: UICollectionViewCell {
     @IBOutlet weak var lbTime: UILabel!
     @IBOutlet weak var ivWeather: UIImageView!
     @IBOutlet weak var lbTemp: UILabel!

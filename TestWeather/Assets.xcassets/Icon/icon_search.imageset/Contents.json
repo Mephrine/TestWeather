@@ -5,11 +5,11 @@
       "scale" : "1x"
     },
     {
+      "filename" : "SEARCH-ICON_42*42.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "menu_setting_off.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

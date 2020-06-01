@@ -15,7 +15,3 @@ class BaseTableViewCell: UITableViewCell {
         self.separatorInset = .zero
     }
 }
-
-protocol BaseCellProtocol {
-    func configuration()
-}

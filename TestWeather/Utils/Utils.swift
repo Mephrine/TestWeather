@@ -22,13 +22,53 @@ class Utils: NSObject {
     public static let SCREEN_HEIGHT = UIScreen.main.bounds.size.height
     public static let STATUS_HEIGHT = UIApplication.shared.statusBarFrame.size.height
     
-    static func addLocation(cityNm: String? = "", latitude: Double, longitude: Double) {
+    static func insertLocation(cityNm: String? = "", latitude: Double, longitude: Double) {
         var array = Defaults.array(forKey: UD_REGI_LOCATION_LIST)
+        let model = WeatherListModel(lat: latitude, lon: longitude, city: cityNm ?? "")
         if array == nil {
-            array = [[String: Any]]()
+            array = [WeatherListModel]()
         }
         
-        array?.append(["city": cityNm ?? "", "lat": latitude, "lon": longitude])
+        array?.append(model)
         Defaults.setValue(array, forKey: UD_REGI_LOCATION_LIST)
+    }
+    
+    static func updateLocation(cityNm: String? = "", latitude: Double, longitude: Double) {
+        
+        var array = Defaults.array(forKey: UD_REGI_LOCATION_LIST) as? [WeatherListModel]
+        
+        if let arrLocation = array {
+            for (index, model) in arrLocation.enumerated() {
+                if model.lat == latitude && model.lon == longitude {
+                    let newModel = WeatherListModel(lat: latitude, lon: longitude, city: cityNm ?? "")
+                    array?.insert(newModel, at: index)
+                    Defaults.setValue(array, forKey: UD_REGI_LOCATION_LIST)
+                    return
+                }
+                
+            }
+        }
+    }
+    
+    static func indexOfLocation(index: Int) -> WeatherListModel? {
+        let array = Defaults.array(forKey: UD_REGI_LOCATION_LIST) as? [WeatherListModel]
+        return array?[index]
+    }
+    
+    static func removeLocation(index: Int) {
+        var array = Defaults.array(forKey: UD_REGI_LOCATION_LIST) ?? [[String: Any]]()
+        if index < array.count {
+            array.remove(at: index)
+        }
+        
+        Defaults.setValue(array, forKey: UD_REGI_LOCATION_LIST)
+    }
+    
+    static func selectedIndexOfLocation() -> Int {
+        return Defaults.integer(forKey: UD_CURRENT_LOCATION_INDEX)
+    }
+    
+    static func setSelectedIndexOfLocation(index: Int) {
+        Defaults.set(index, forKey: UD_CURRENT_LOCATION_INDEX)
     }
 }

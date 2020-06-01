@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WeatherCurrentInfoCell: BaseTableViewCell, BaseCellProtocol {
+class WeatherCurrentInfoCell: BaseCollectionViewCell {
     @IBOutlet weak var lbSunRise: UILabel!      // 일출
     @IBOutlet weak var lbSunSet: UILabel!       // 일몰
     @IBOutlet weak var lbChanceRain: UILabel!   // 비 올 확률
@@ -20,7 +20,7 @@ class WeatherCurrentInfoCell: BaseTableViewCell, BaseCellProtocol {
     @IBOutlet weak var lbVisibility: UILabel!   // 가시거리
     @IBOutlet weak var lbUVIndex: UILabel!      // 자외선 지수
     
-    func configuration() {
+    func configuration(item: WeatherCurrentInfoModel) {
         
     }
 }

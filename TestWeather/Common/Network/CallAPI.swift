@@ -9,7 +9,7 @@
 import Foundation
 
 class CallAPI {
-    enum path {
+    fileprivate enum path {
         case currentWeather(lat: String, lon: String)
         case weather5Days(lat: String, lon: String)
         case currentWeatherCity(cityNm: String)
@@ -39,7 +39,7 @@ class CallAPI {
             }
         }
         
-        var pathURL: String {
+        fileprivate var pathURL: String {
             if let param = parameters?.toQueryString() {
                 return "\(strUrl)?\(param)"
             }
@@ -69,18 +69,20 @@ class CallAPI {
     private lazy var session = URLSession(configuration: .default)
     
     // MARK: - API List
-    func getCurrentWeather(lat: String, lon: String, _ completion: @escaping (Result<[Weather], APIError>) -> Void) {
+    func getCurrentWeather(lat: String, lon: String, _ completion: @escaping (Result<Weather, APIError>) -> Void) {
         guard let url = URL(string: path.currentWeather(lat: lat, lon: lon).pathURL) else {
+            p("getCurrentWeather error")
             DispatchQueue.main.async {
                 completion(.failure(.erroURL))
             }
             return
         }
         
-        let loadAPI = API<[Weather]>(url)
+        let loadAPI = API<Weather>(url)
         
         session.load(loadAPI) { resultData, success in
-            guard let data = resultData, !data.isEmpty else {
+            p("getCurrentWeather result : \(String(describing: resultData))")
+            guard let data = resultData else {
                 DispatchQueue.main.async {
                     completion(.failure(.noData))
                 }

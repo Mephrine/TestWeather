@@ -12,11 +12,13 @@ struct Weather: Codable {
     let main: WeatherMain?
     let weather: [WeatherSub]?
     let visibility: Double?
-    let rain: Rain?
+    let rain: Fall?
+    let snow: Fall?
     let wind: Wind?
     let clouds: Clouds?
     let dt: Double?
     let sys: WeatherSys?
+    let name: String?
 }
 
 struct WeatherMain: Codable {
@@ -68,16 +70,19 @@ struct WeatherSub: Codable {
     }
 }
 
-struct Rain: Codable {
-    let rain: Double?
+struct Fall: Codable {
+    let hourOne: Double?
+    let hourThree: Double?
     
     enum CodingKeys: String, CodingKey {
-        case rain = "3h"
+        case hourOne = "1h"
+        case hourThree = "3h"
     }
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        self.rain = (try? values.decode(Double.self, forKey: .rain)) ?? 0.0
+        self.hourOne = (try? values.decode(Double.self, forKey: .hourOne)) ?? 0.0
+        self.hourThree = (try? values.decode(Double.self, forKey: .hourThree)) ?? 0.0
     }
 }
 

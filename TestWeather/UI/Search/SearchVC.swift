@@ -11,9 +11,10 @@ import MapKit
 
 class SearchVC: BaseVC {
     @IBOutlet weak var tableSearch: UITableView!
+    @IBOutlet weak var btnClose: UIButton!
     
-    var resultsHandler: ((String, String) -> Void)?
-
+    var resultsHandler: (() -> Void)?
+    
     private var searchCompleter = MKLocalSearchCompleter()
     private var searchList = [MKLocalSearchCompletion]()
     private lazy var searchController = UISearchController(searchResultsController: nil)
@@ -28,7 +29,7 @@ class SearchVC: BaseVC {
     }
     
     override func initView() {
-        self.addNaviItem()
+        self.setSearchController()
         
         //tableView
         tableSearch.delegate = self
@@ -37,20 +38,24 @@ class SearchVC: BaseVC {
         tableSearch.rowHeight = UITableView.automaticDimension
         tableSearch.separatorStyle = .singleLine
         tableSearch.backgroundColor = .white
+        
+        tableSearch.tableHeaderView = searchController.searchBar
+        
+        let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(finishFlow))
+        btnClose.addGestureRecognizer(tapGesture)
     }
     
     //MARK: - e.g.
-    private func addNaviItem() {
+    private func setSearchController() {
+        
         // SearchBar 네비게이션에 추가
         searchController.searchResultsUpdater = self
         searchController.searchBar.placeholder = STR_SEARCH_PLACEHOLDER
+        searchController.searchBar.searchBarStyle = .prominent
+        searchController.searchBar.sizeToFit()
         searchController.obscuresBackgroundDuringPresentation = false
-        navigationItem.searchController = searchController
         
-        // 닫기 버튼 네비게이션에 추가
-        let naviItem = UIBarButtonItem.init(barButtonSystemItem: .stop, target: self, action: #selector(self.finishFlow))
-        naviItem.tintColor = .black
-        navigationItem.rightBarButtonItem = naviItem
+        definesPresentationContext = true
     }
     
     func focusSearchBar() {
@@ -97,7 +102,7 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath)
-
+        
         if let lbSearch = cell.viewWithTag(100) as? UILabel {
             lbSearch.text = searchList[indexPath.row].title
         }
@@ -110,28 +115,21 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
         let search = MKLocalSearch(request: request)
         search.start { (response, error) in
             guard error == nil else {
-                p("search error : \(error?.localizedDescription)")
+                p("search error : \(error?.localizedDescription ?? "")")
                 return
             }
             
             if let response = response {
                 p("result : response : \(response)")
-                for (index, item) in response.mapItems.enumerated() {
-                    p("mapItem\(index) : \(item)")
+                let item = response.mapItems.first
+                if let coordinate = item?.placemark.location?.coordinate, let name = item?.name {
+                    Utils.insertLocation(cityNm: name, latitude: coordinate.latitude, longitude: coordinate.longitude)
+                    
+                    self.resultsHandler?()
+                    self.finishFlow()
                 }
             }
-//            guard let placeMark = response?.mapItems.first?.placemark else {
-//                return
-//            }
-//            let coordinate = Coordinate(coordinate: placeMark.coordinate)
-//            self.delegate?.userAdd(newLocation: Location(coordinate: coordinate, name: "\(placeMark.locality ?? selectedResult.title)"))
-//            self.finishFlow()
         }
-        
-
     }
-    
-    
-    
 }
 

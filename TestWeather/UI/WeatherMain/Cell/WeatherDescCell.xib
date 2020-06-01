@@ -4,15 +4,16 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ray-CK-8qW" customClass="WeatherDescCell" customModule="TestWeather" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WeatherDescCell" id="H9X-Qx-7Cc" customClass="WeatherDescCell" customModule="TestWeather" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-            <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ray-CK-8qW" id="lcq-4O-0ep">
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="NhJ-Nh-JAG">
                 <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -24,16 +25,15 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XZE-XK-we4">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="1" width="414" height="42"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BYS-If-53z">
-                                <rect key="frame" x="20" y="10" width="374" height="24"/>
+                                <rect key="frame" x="20" y="10" width="374" height="22"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="15"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="BYS-If-53z" firstAttribute="leading" secondItem="XZE-XK-we4" secondAttribute="leading" constant="20" id="77M-VO-Ql9"/>
                             <constraint firstAttribute="trailing" secondItem="BYS-If-53z" secondAttribute="trailing" constant="20" id="Ig8-1o-6k3"/>
@@ -50,22 +50,22 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="8Oz-1d-YS8" firstAttribute="leading" secondItem="lcq-4O-0ep" secondAttribute="leading" id="1FH-Sj-O6i"/>
-                    <constraint firstAttribute="bottom" secondItem="XZE-XK-we4" secondAttribute="bottom" id="4dt-UD-l9j"/>
-                    <constraint firstAttribute="trailing" secondItem="8Oz-1d-YS8" secondAttribute="trailing" id="6i2-gS-OLs"/>
-                    <constraint firstItem="XZE-XK-we4" firstAttribute="top" secondItem="lcq-4O-0ep" secondAttribute="top" id="Fzd-fI-rKu"/>
-                    <constraint firstItem="iAF-RU-e05" firstAttribute="leading" secondItem="lcq-4O-0ep" secondAttribute="leading" id="aWX-OV-x7q"/>
-                    <constraint firstItem="8Oz-1d-YS8" firstAttribute="top" secondItem="lcq-4O-0ep" secondAttribute="top" id="f2H-hF-9NR"/>
-                    <constraint firstItem="XZE-XK-we4" firstAttribute="leading" secondItem="lcq-4O-0ep" secondAttribute="leading" id="lh1-8s-LRA"/>
-                    <constraint firstAttribute="trailing" secondItem="iAF-RU-e05" secondAttribute="trailing" id="ptq-k4-eI2"/>
-                    <constraint firstAttribute="trailing" secondItem="XZE-XK-we4" secondAttribute="trailing" id="uOZ-mA-m0m"/>
-                    <constraint firstAttribute="bottom" secondItem="iAF-RU-e05" secondAttribute="bottom" id="vub-vf-riT"/>
+                    <constraint firstAttribute="trailing" secondItem="XZE-XK-we4" secondAttribute="trailing" id="7Ny-on-6hf"/>
+                    <constraint firstItem="XZE-XK-we4" firstAttribute="top" secondItem="8Oz-1d-YS8" secondAttribute="bottom" id="GXJ-y8-dvi"/>
+                    <constraint firstAttribute="bottom" secondItem="iAF-RU-e05" secondAttribute="bottom" id="KH8-Kg-SYM"/>
+                    <constraint firstItem="XZE-XK-we4" firstAttribute="leading" secondItem="NhJ-Nh-JAG" secondAttribute="leading" id="O6h-3v-cfc"/>
+                    <constraint firstAttribute="trailing" secondItem="iAF-RU-e05" secondAttribute="trailing" id="XgS-5a-NUE"/>
+                    <constraint firstAttribute="trailing" secondItem="8Oz-1d-YS8" secondAttribute="trailing" id="ZtH-x5-5sX"/>
+                    <constraint firstItem="8Oz-1d-YS8" firstAttribute="top" secondItem="NhJ-Nh-JAG" secondAttribute="top" id="n1B-Oc-MO7"/>
+                    <constraint firstItem="iAF-RU-e05" firstAttribute="top" secondItem="XZE-XK-we4" secondAttribute="bottom" id="qZf-ql-LVa"/>
+                    <constraint firstItem="8Oz-1d-YS8" firstAttribute="leading" secondItem="NhJ-Nh-JAG" secondAttribute="leading" id="sg1-x7-L5n"/>
+                    <constraint firstItem="iAF-RU-e05" firstAttribute="leading" secondItem="NhJ-Nh-JAG" secondAttribute="leading" id="xfF-Zs-qLu"/>
                 </constraints>
-            </tableViewCellContentView>
+            </collectionViewCellContentView>
             <connections>
-                <outlet property="lbDesc" destination="BYS-If-53z" id="zPm-vF-Gzq"/>
+                <outlet property="lbDesc" destination="BYS-If-53z" id="WCn-g5-DOZ"/>
             </connections>
-            <point key="canvasLocation" x="63.768115942028992" y="-242.41071428571428"/>
-        </tableViewCell>
+            <point key="canvasLocation" x="-26.086956521739133" y="-89.0625"/>
+        </collectionViewCell>
     </objects>
 </document>

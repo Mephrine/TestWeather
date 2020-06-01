@@ -9,9 +9,15 @@
 import UIKit
 
 extension NSLayoutConstraint {
-    func addIdAndActive(_ id: String) {
+    func addIdAndActive(_ id: String) -> NSLayoutConstraint {
         self.identifier = id
         self.isActive = true
+        return self
+    }
+    
+    func setPriority(_ value: Float?) {
+        guard value != nil else { return }
+        self.priority = .init(rawValue: value!)
     }
     
     func reamkeMultiplier(_ multiplier: CGFloat) -> NSLayoutConstraint {
