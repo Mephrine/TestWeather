@@ -15,6 +15,13 @@ extension Date {
         return calendar
     }
     
+    var calendarAuto: Calendar {
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(secondsFromGMT: -9 * 60 * 60)!
+        
+        return calendar
+    }
+    
     var dateSymbol: String {
         return self.dateToString(date: self, "a")
     }

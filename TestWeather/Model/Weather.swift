@@ -8,6 +8,10 @@
 
 import Foundation
 
+struct DaysWeather: Codable {
+    let list: [Weather]?
+}
+
 struct Weather: Codable {
     let main: WeatherMain?
     let weather: [WeatherSub]?
@@ -19,6 +23,39 @@ struct Weather: Codable {
     let dt: Double?
     let sys: WeatherSys?
     let name: String?
+    let city: City?
+    let dtTxt: String
+    
+    enum CodingKeys: String, CodingKey {
+        case main = "main"
+        case weather = "weather"
+        case visibility = "visibility"
+        case rain = "rain"
+        case snow = "snow"
+        case wind = "wind"
+        case clouds = "clouds"
+        case dt = "dt"
+        case sys = "sys"
+        case name = "name"
+        case city = "city"
+        case dtTxt = "dt_txt"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        self.main = (try? values.decode(WeatherMain.self, forKey: .main))
+        self.weather = (try? values.decode([WeatherSub].self, forKey: .weather))
+        self.visibility = (try? values.decode(Double.self, forKey: .visibility))
+        self.rain = (try? values.decode(Fall.self, forKey: .rain))
+        self.snow = (try? values.decode(Fall.self, forKey: .snow))
+        self.wind = (try? values.decode(Wind.self, forKey: .wind))
+        self.clouds = (try? values.decode(Clouds.self, forKey: .clouds))
+        self.dt = (try? values.decode(Double.self, forKey: .dt))
+        self.sys = (try? values.decode(WeatherSys.self, forKey: .sys))
+        self.name = (try? values.decode(String.self, forKey: .name))
+        self.city = (try? values.decode(City.self, forKey: .city))
+        self.dtTxt = (try? values.decode(String.self, forKey: .dtTxt)) ?? ""
+    }
 }
 
 struct WeatherMain: Codable {
@@ -52,7 +89,7 @@ struct WeatherMain: Codable {
 struct WeatherSub: Codable {
     let main: String?
     let description: String?
-    let icon: URL?
+    let icon: String?
     
     enum CodingKeys: String, CodingKey {
         case main = "main"
@@ -66,7 +103,7 @@ struct WeatherSub: Codable {
         self.main = (try? values.decode(String.self, forKey: .main)) ?? ""
         self.description = (try? values.decode(String.self, forKey: .description)) ?? ""
         let strIcon = (try? values.decode(String.self, forKey: .icon)) ?? ""
-        self.icon = URL(string: "\(ICON_DOMAIN)\(strIcon).png")
+        self.icon = "\(ICON_DOMAIN)\(strIcon).png"
     }
 }
 
@@ -97,6 +134,12 @@ struct Clouds: Codable {
 }
 
 struct WeatherSys: Codable {
+    let country: String?
+    let sunrise: Double?
+    let sunset: Double?
+}
+
+struct City: Codable {
     let country: String?
     let sunrise: Double?
     let sunset: Double?

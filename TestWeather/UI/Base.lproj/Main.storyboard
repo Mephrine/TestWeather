@@ -256,37 +256,49 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wnn-Kl-L3O">
-                                <rect key="frame" x="0.0" y="44" width="375" height="768"/>
+                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="ByT-0U-feF">
+                                <rect key="frame" x="0.0" y="44" width="375" height="60"/>
+                                <subviews>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qzt-Sy-azs">
+                                        <rect key="frame" x="304" y="0.0" width="61" height="60"/>
+                                        <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                                        <state key="normal" image="icon_search"/>
+                                        <connections>
+                                            <action selector="tapBtnSearch:" destination="JW5-mZ-lPL" eventType="touchUpInside" id="zLp-6g-2aZ"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GGP-28-uaW">
+                                        <rect key="frame" x="0.0" y="59" width="375" height="1"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="Smb-xz-W9b"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="1aI-kY-acj"/>
+                                    <constraint firstItem="qzt-Sy-azs" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ByT-0U-feF" secondAttribute="leading" constant="20" id="Ejm-xv-wiE"/>
+                                    <constraint firstAttribute="trailing" secondItem="GGP-28-uaW" secondAttribute="trailing" id="HDL-ZE-70e"/>
+                                    <constraint firstItem="qzt-Sy-azs" firstAttribute="top" secondItem="ByT-0U-feF" secondAttribute="top" id="V0W-9E-0L0"/>
+                                    <constraint firstItem="GGP-28-uaW" firstAttribute="leading" secondItem="ByT-0U-feF" secondAttribute="leading" id="WGz-qe-k1p"/>
+                                    <constraint firstAttribute="trailing" secondItem="qzt-Sy-azs" secondAttribute="trailing" constant="10" id="blQ-42-2oA"/>
+                                    <constraint firstAttribute="bottom" secondItem="qzt-Sy-azs" secondAttribute="bottom" id="pCE-sm-1jD"/>
+                                    <constraint firstAttribute="bottom" secondItem="GGP-28-uaW" secondAttribute="bottom" id="wgl-IY-jJ3"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wnn-Kl-L3O">
+                                <rect key="frame" x="0.0" y="104" width="375" height="708"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <view key="tableHeaderView" contentMode="scaleToFill" id="ByT-0U-feF">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <subviews>
-                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qzt-Sy-azs">
-                                            <rect key="frame" x="304" y="0.0" width="61" height="60"/>
-                                            <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
-                                            <state key="normal" image="icon_search"/>
-                                            <connections>
-                                                <action selector="tapBtnSearch:" destination="JW5-mZ-lPL" eventType="touchUpInside" id="zLp-6g-2aZ"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="60" id="1aI-kY-acj"/>
-                                        <constraint firstItem="qzt-Sy-azs" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ByT-0U-feF" secondAttribute="leading" constant="20" id="Ejm-xv-wiE"/>
-                                        <constraint firstItem="qzt-Sy-azs" firstAttribute="top" secondItem="ByT-0U-feF" secondAttribute="top" id="V0W-9E-0L0"/>
-                                        <constraint firstAttribute="trailing" secondItem="qzt-Sy-azs" secondAttribute="trailing" constant="10" id="blQ-42-2oA"/>
-                                        <constraint firstAttribute="bottom" secondItem="qzt-Sy-azs" secondAttribute="bottom" id="pCE-sm-1jD"/>
-                                    </constraints>
-                                </view>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Wnn-Kl-L3O" firstAttribute="top" secondItem="GiD-dK-nhN" secondAttribute="top" id="I4R-c1-3IR"/>
+                            <constraint firstItem="ByT-0U-feF" firstAttribute="leading" secondItem="GiD-dK-nhN" secondAttribute="leading" id="DIK-7B-UEE"/>
+                            <constraint firstItem="Wnn-Kl-L3O" firstAttribute="top" secondItem="ByT-0U-feF" secondAttribute="bottom" id="GKa-TR-0Oe"/>
+                            <constraint firstItem="ByT-0U-feF" firstAttribute="trailing" secondItem="GiD-dK-nhN" secondAttribute="trailing" id="H2E-eA-8Ac"/>
                             <constraint firstItem="GiD-dK-nhN" firstAttribute="trailing" secondItem="Wnn-Kl-L3O" secondAttribute="trailing" id="Pgi-OQ-wZi"/>
+                            <constraint firstItem="ByT-0U-feF" firstAttribute="top" secondItem="GiD-dK-nhN" secondAttribute="top" id="smb-E8-1kn"/>
                             <constraint firstItem="Wnn-Kl-L3O" firstAttribute="leading" secondItem="GiD-dK-nhN" secondAttribute="leading" id="yPx-vg-zpK"/>
                             <constraint firstAttribute="bottom" secondItem="Wnn-Kl-L3O" secondAttribute="bottom" id="ySh-82-4EW"/>
                         </constraints>
@@ -299,7 +311,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EaP-c2-r2R" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="919" y="127"/>
+            <point key="canvasLocation" x="917.60000000000002" y="126.35467980295567"/>
         </scene>
     </scenes>
     <resources>

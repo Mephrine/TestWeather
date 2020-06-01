@@ -23,3 +23,4 @@ public let UD_CURRENT_LOCATION_INDEX         = "UD_CURRENT_LOCATION_INDEX"
 
 //MARK: Notification
 public let NOTI_REQUEST_API                  = "NOTI_REQUEST_API"
+public let NOTI_SCROLL_ANIMATION             = "NOTI_SCROLL_ANIMATION"

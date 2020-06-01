@@ -19,12 +19,15 @@ class WeatherHeaderView: UICollectionReusableView {
     @IBOutlet weak var vCenterView: UIView!
     @IBOutlet weak var cvHorizontalWeather: UICollectionView!
     @IBOutlet weak var constBgH: NSLayoutConstraint!
+    @IBOutlet weak var constTopViewTop: NSLayoutConstraint!
     
     private let itemCell    = "WeatherCenterItemCell"
     var item: WeatherHeaderModel?
+    var itemList = [Weather]()
     
     override func awakeFromNib() {
         constBgH.constant = Utils.SCREEN_HEIGHT
+        constTopViewTop.constant = Utils.SAFE_AREA_TOP
         
         self.cvHorizontalWeather.dataSource = self
         self.cvHorizontalWeather.delegate   = self
@@ -38,7 +41,7 @@ class WeatherHeaderView: UICollectionReusableView {
         }
     }
     
-    func configuration(item: WeatherHeaderModel) {
+    func configuration(item: WeatherHeaderModel, list: DaysWeather) {
         self.item = item
         self.lbCity.text = item.city
         self.lbWeather.text = item.weather
@@ -47,27 +50,45 @@ class WeatherHeaderView: UICollectionReusableView {
         self.lbTime.text = item.time
         self.lbHighTemp.text = item.highTemp
         self.lbLowTemp.text = item.lowTemp
+        if let weatherList = list.list {
+            self.itemList = [Weather]()
+            for (index, item) in weatherList.enumerated() {
+                if index > 9 {
+                    break
+                }
+                self.itemList.append(item)
+            }
+        }
         
         self.cvHorizontalWeather.reloadData()
-    }
-    
-    func animScrollFade() {
-        //TODO: - vCenterView, lbTemp에 적용 필요.
     }
 }
 
 
 extension WeatherHeaderView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return itemList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let index = indexPath.row
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: itemCell, for: indexPath) as? WeatherCenterItemCell {
-            cell.configuration()
+            
+            let cellModel = WeatherCenterModel(itemList[index])
+            cell.configuration(item: cellModel, index: index)
             return cell
         }
         
         return UICollectionViewCell()
+    }
+}
+
+extension WeatherHeaderView: HeaderFlowLayoutScrollDelegate {
+    func moveOffsetY(offsetY: CGFloat) {
+        if offsetY < 100 {
+            self.vCenterView.alpha = 1 - abs(offsetY / 100)
+        }
+        
+        self.lbTemp.alpha = 1 - abs(offsetY / 200)
     }
 }

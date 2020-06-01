@@ -21,6 +21,7 @@ class Utils: NSObject {
     public static let SCREEN_WIDTH = UIScreen.main.bounds.size.width
     public static let SCREEN_HEIGHT = UIScreen.main.bounds.size.height
     public static let STATUS_HEIGHT = UIApplication.shared.statusBarFrame.size.height
+    public static var SAFE_AREA_TOP: CGFloat = 0
     
     private static func archiveArray<T>(array : [T]) -> Data {
         do {
@@ -87,7 +88,8 @@ class Utils: NSObject {
             array?.remove(at: index)
         }
         
-        Defaults.setValue(array, forKey: UD_REGI_LOCATION_LIST)
+        let archive = self.archiveArray(array: array!)
+        Defaults.setValue(archive, forKey: UD_REGI_LOCATION_LIST)
         Defaults.synchronize()
     }
     

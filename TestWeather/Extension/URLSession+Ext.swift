@@ -11,6 +11,7 @@ import UIKit
 extension URLSession {
     func load<T>(_ api: API<T>, completion: @escaping (T?, Bool) -> Void) {
         dataTask(with: api.request) { data, response, error in
+            
             // 에러 확인
             guard let response = response as? HTTPURLResponse, response.statusCode == 200, error == nil else {
                 p("load api error : response or statusCode")

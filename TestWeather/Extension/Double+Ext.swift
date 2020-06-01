@@ -38,12 +38,17 @@ extension Double {
     
     // 기압
     var toPressure: String {
-        return "\(self)hPA"
+        return "\(self)hPa"
     }
     
     // 습도
     var toHumidity: String {
         return "\(self)%"
+    }
+    
+    // 킬로미터
+    var toKilioMeters: String {
+        return String(format: "%.2fkm", self / 1000.0)
     }
     
     func millsToDate() -> Date {

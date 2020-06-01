@@ -49,7 +49,7 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgI-3y-Ktl">
                                     <rect key="frame" x="385" y="66" width="9" height="24"/>
                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="20"/>
-                                    <color key="textColor" white="1" alpha="0.25" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="textColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -69,7 +69,7 @@
                                 <constraint firstItem="2cR-jk-2hP" firstAttribute="top" relation="greaterThanOrEqual" secondItem="q2r-su-vbW" secondAttribute="top" id="xXu-2U-5NZ"/>
                             </constraints>
                         </view>
-                        <view clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="999" translatesAutoresizingMaskIntoConstraints="NO" id="4cg-0G-L5e">
+                        <view contentMode="scaleToFill" verticalCompressionResistancePriority="999" translatesAutoresizingMaskIntoConstraints="NO" id="4cg-0G-L5e">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Jf-5E-4gf">
@@ -100,14 +100,14 @@
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlZ-Kg-9cX">
-                                    <rect key="frame" x="199.5" y="174.5" width="15.5" height="48"/>
+                                    <rect key="frame" x="204.5" y="174.5" width="15.5" height="48"/>
                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="40"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="mlZ-Kg-9cX" firstAttribute="centerX" secondItem="4cg-0G-L5e" secondAttribute="centerX" id="4NY-tr-i6h"/>
+                                <constraint firstItem="mlZ-Kg-9cX" firstAttribute="centerX" secondItem="4cg-0G-L5e" secondAttribute="centerX" constant="5" id="4NY-tr-i6h"/>
                                 <constraint firstItem="1Jf-5E-4gf" firstAttribute="centerX" secondItem="4cg-0G-L5e" secondAttribute="centerX" id="Kay-uo-6Gk"/>
                                 <constraint firstItem="1Jf-5E-4gf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4cg-0G-L5e" secondAttribute="leading" id="lTO-iM-JFl"/>
                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1Jf-5E-4gf" secondAttribute="trailing" id="tBY-y1-VuE"/>
@@ -188,6 +188,7 @@
             </constraints>
             <connections>
                 <outlet property="constBgH" destination="3YT-Od-0vO" id="ysI-fs-bIV"/>
+                <outlet property="constTopViewTop" destination="D4F-3c-C1c" id="NMg-eM-FJX"/>
                 <outlet property="cvHorizontalWeather" destination="0Em-ZZ-Uxd" id="W2c-Yo-IR9"/>
                 <outlet property="lbCity" destination="9Zx-5l-dJd" id="2kS-SF-Bvn"/>
                 <outlet property="lbDay" destination="2cR-jk-2hP" id="Prz-dD-ldv"/>

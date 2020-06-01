@@ -18,7 +18,7 @@ class WeatherWeekCell: UICollectionViewCell {
         return tableWeek
     }()
     
-    private var itemList = [WeatherWeekModel]()
+    private var itemList = [Weather]()
     
     private let itemCell = "WeatherWeekItemCell"
     
@@ -54,9 +54,13 @@ class WeatherWeekCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configuration(item: [WeatherWeekModel]) {
-        self.itemList = item
-        self.tableWeek.reloadData()
+    func configuration(item: DaysWeather) {
+        if let list = item.list {
+            // 0시 기준으로만 뽑기
+            let filterList = list.filter{ $0.dtTxt.contains("00:00:00") }
+            self.itemList = filterList
+            self.tableWeek.reloadData()
+        }
     }
     
     func configuration() {
@@ -70,13 +74,15 @@ class WeatherWeekCell: UICollectionViewCell {
 
 extension WeatherWeekCell: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return itemList.count > 10 ? 10 : itemList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let index = indexPath.row
         let cell = tableView.dequeueReusableCell(withIdentifier: itemCell, for: indexPath) as! WeatherWeekItemCell
-        cell.configuration()
-        
+        let cellModel = WeatherWeekModel(itemList[index])
+        cell.configuration(item: cellModel)
+
         return cell
     }
 }

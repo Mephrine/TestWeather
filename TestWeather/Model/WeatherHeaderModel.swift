@@ -35,7 +35,7 @@ struct WeatherHeaderModel {
         p("dt : \(dt) | \(sunrise) | \(sunset)")
         // 오늘 | 야간 2개로만 설정.
         if sunrise > dt || dt > sunset {
-            return "야간s"
+            return "야간"
         }
         
         return "오늘"

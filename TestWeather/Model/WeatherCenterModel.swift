@@ -15,27 +15,23 @@ struct WeatherCenterModel {
         self.item = weather
     }
     
-    var city: String {
-        return item.name ?? ""
+    var temp: String {
+        return (item.main?.temp ?? 0.0).toCelsiusIncldeDegree
     }
     
-    var weather: String {
-        return item.weather?.first?.description ?? ""
-    }
-    
-    var temp: Double {
-        return item.main?.temp ?? 0.0
+    var icon: String {
+        return item.weather?.first?.icon ?? ""
     }
     
     var day: String {
-        return ""
+        return item.dt?.millsToDate().formatted("a h'시'") ?? ""
     }
     
-    var highTemp: Double {
-        return item.main?.tempMax ?? 0.0
-    }
-    
-    var lowTemp: Double {
-        return item.main?.tempMin ?? 0.0
+    func displayTime(index: Int) -> String {
+        if index == 0 {
+            return "지금"
+        } else {
+            return self.day
+        }
     }
 }

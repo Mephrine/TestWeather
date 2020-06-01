@@ -15,27 +15,19 @@ struct WeatherDescModel {
         self.item = weather
     }
     
-    var city: String {
-        return item.name ?? ""
-    }
-    
-    var weather: String {
+    private var weather: String {
         return item.weather?.first?.description ?? ""
     }
     
-    var temp: Double {
-        return item.main?.temp ?? 0.0
+    private var temp: String {
+        return (item.main?.temp ?? 0.0).toCelsiusIncldeDegree
     }
     
-    var day: String {
-        return ""
+    private var highTemp: String {
+        return (item.main?.tempMax ?? 0.0).toCelsiusIncldeDegree
     }
     
-    var highTemp: Double {
-        return item.main?.tempMax ?? 0.0
-    }
-    
-    var lowTemp: Double {
-        return item.main?.tempMin ?? 0.0
+    var desc: String {
+        return "오늘: 현재 날씨 \(weather), 기온은 \(temp)이며 최고 기온은 \(highTemp)입니다."
     }
 }

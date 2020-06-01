@@ -10,42 +10,41 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WeatherListCell" rowHeight="100" id="8md-W2-64G" customClass="WeatherListCell" customModule="TestWeather" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8md-W2-64G" id="YO1-tS-lRK">
-                <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="751" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WE6-7a-Uus">
-                        <rect key="frame" x="384" y="0.0" width="0.0" height="80"/>
-                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="50"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="plF-nA-fBe">
-                        <rect key="frame" x="20" y="40" width="0.0" height="0.0"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="city" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="plF-nA-fBe">
+                        <rect key="frame" x="20" y="10" width="30.5" height="40"/>
                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="20"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ujA-ul-IWZ">
+                        <rect key="frame" x="10" y="59" width="394" height="1"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="rbb-PZ-ejn"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="plF-nA-fBe" firstAttribute="top" relation="greaterThanOrEqual" secondItem="YO1-tS-lRK" secondAttribute="top" constant="10" id="2Ba-qW-wtb"/>
-                    <constraint firstItem="WE6-7a-Uus" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="plF-nA-fBe" secondAttribute="trailing" constant="20" id="CIh-oT-BOT"/>
-                    <constraint firstItem="plF-nA-fBe" firstAttribute="centerY" secondItem="YO1-tS-lRK" secondAttribute="centerY" id="EJ6-Pv-ssY"/>
-                    <constraint firstAttribute="bottom" secondItem="WE6-7a-Uus" secondAttribute="bottom" id="bDt-SO-R8o"/>
+                    <constraint firstAttribute="trailing" secondItem="ujA-ul-IWZ" secondAttribute="trailing" constant="10" id="1tP-6S-fPd"/>
+                    <constraint firstItem="plF-nA-fBe" firstAttribute="top" secondItem="YO1-tS-lRK" secondAttribute="top" constant="10" id="2Ba-qW-wtb"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="plF-nA-fBe" secondAttribute="trailing" constant="20" id="Oub-yL-v1y"/>
+                    <constraint firstAttribute="bottom" secondItem="ujA-ul-IWZ" secondAttribute="bottom" id="Uq2-a9-azF"/>
+                    <constraint firstItem="ujA-ul-IWZ" firstAttribute="leading" secondItem="YO1-tS-lRK" secondAttribute="leading" constant="10" id="bJg-45-3Wa"/>
                     <constraint firstItem="plF-nA-fBe" firstAttribute="leading" secondItem="YO1-tS-lRK" secondAttribute="leading" constant="20" id="cfy-Uc-zcY"/>
-                    <constraint firstItem="WE6-7a-Uus" firstAttribute="top" secondItem="YO1-tS-lRK" secondAttribute="top" id="hrS-UB-Cw4"/>
-                    <constraint firstAttribute="trailing" secondItem="WE6-7a-Uus" secondAttribute="trailing" constant="30" id="iPf-NO-xTJ"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="plF-nA-fBe" secondAttribute="bottom" constant="10" id="taN-5Q-uXK"/>
+                    <constraint firstAttribute="bottom" secondItem="plF-nA-fBe" secondAttribute="bottom" constant="10" id="taN-5Q-uXK"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="lbCity" destination="plF-nA-fBe" id="Eg5-X8-xHh"/>
-                <outlet property="lbTemp" destination="WE6-7a-Uus" id="cWj-hz-24K"/>
             </connections>
-            <point key="canvasLocation" x="-194.20289855072465" y="-262.16517857142856"/>
+            <point key="canvasLocation" x="-194.20289855072465" y="-262.5"/>
         </tableViewCell>
     </objects>
 </document>

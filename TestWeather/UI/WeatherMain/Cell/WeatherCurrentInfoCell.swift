@@ -15,13 +15,18 @@ class WeatherCurrentInfoCell: BaseCollectionViewCell {
     @IBOutlet weak var lbHumidity: UILabel!     // 습도
     @IBOutlet weak var lbWind: UILabel!         // 바람
     @IBOutlet weak var lbFeels: UILabel!        // 체감
-    @IBOutlet weak var lbRainFall: UILabel!     // 강수량
     @IBOutlet weak var lbPressure: UILabel!     // 기압
     @IBOutlet weak var lbVisibility: UILabel!   // 가시거리
-    @IBOutlet weak var lbUVIndex: UILabel!      // 자외선 지수
     
     func configuration(item: WeatherCurrentInfoModel) {
-        
+        self.lbSunRise.text = item.sunrise
+        self.lbSunSet.text = item.sunset
+        self.lbChanceRain.text = item.chanceRain
+        self.lbHumidity.text = item.humidity
+        self.lbWind.text = item.wind
+        self.lbFeels.text = item.feelsLike
+        self.lbPressure.text = item.pressure
+        self.lbVisibility.text = item.visibility
     }
 }
 

@@ -53,48 +53,71 @@ extension UIView {
         self.makeConstAspectRatioHeight(heightAspect1, heightAspect2)
     }
     
+    func makeConstCenter(target: UIView? = nil) {
+        let targetView = target ?? self.superview
+        guard let superView = targetView else { return }
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        self.makeConstCenterX(superView.centerXAnchor)
+        self.makeConstCenterY(superView.centerYAnchor)
+    }
+    
+    
     func setConst<T>(_ identifier: String, _ anchor: T , _ padding: CGFloat, _ symbol: Symbol, _ priority: Float? = 1000) {
         if let anchorY = anchor as? NSLayoutYAxisAnchor {
             switch symbol {
             case .equal:
                 if identifier.lowercased().contains("top") {
                     topAnchor.constraint(equalTo: anchorY, constant: padding).addIdAndActive(identifier).setPriority(priority)
-                } else {
+                } else if identifier.lowercased().contains("bottom") {
                     bottomAnchor.constraint(equalTo: anchorY, constant: padding).addIdAndActive(identifier).setPriority(priority)
+                } else {
+                    centerYAnchor.constraint(equalTo: anchorY, constant: padding).addIdAndActive(identifier).setPriority(priority)
                 }
             case .grater:
                 if identifier.lowercased().contains("top") {
                     topAnchor.constraint(greaterThanOrEqualTo: anchorY, constant: padding).addIdAndActive(identifier).setPriority(priority)
                     
-                } else {
+                } else if identifier.lowercased().contains("bottom") {
                     bottomAnchor.constraint(greaterThanOrEqualTo: anchorY, constant: padding).addIdAndActive(identifier).setPriority(priority)
+                }  else {
+                    centerYAnchor.constraint(greaterThanOrEqualTo: anchorY, constant: padding).addIdAndActive(identifier).setPriority(priority)
                 }
             case .less:
                 if identifier.lowercased().contains("top") {
                     topAnchor.constraint(lessThanOrEqualTo: anchorY, constant: padding).addIdAndActive(identifier).setPriority(priority)
-                } else {
+                } else if identifier.lowercased().contains("bottom") {
                     bottomAnchor.constraint(lessThanOrEqualTo: anchorY, constant: padding).addIdAndActive(identifier).setPriority(priority)
+                }  else {
+                    centerYAnchor.constraint(lessThanOrEqualTo: anchorY, constant: padding).addIdAndActive(identifier).setPriority(priority)
                 }
             }
-        } else if let anchorY = anchor as? NSLayoutXAxisAnchor {
+        } else if let anchorX = anchor as? NSLayoutXAxisAnchor {
             switch symbol {
             case .equal:
                 if identifier.lowercased().contains("left") {
-                    leftAnchor.constraint(equalTo: anchorY, constant: padding).addIdAndActive(identifier).setPriority(priority)
-                } else {
-                    rightAnchor.constraint(equalTo: anchorY, constant: padding).addIdAndActive(identifier).setPriority(priority)
+                    leftAnchor.constraint(equalTo: anchorX, constant: padding).addIdAndActive(identifier).setPriority(priority)
+                } else if identifier.lowercased().contains("right") {
+                    rightAnchor.constraint(equalTo: anchorX, constant: padding).addIdAndActive(identifier).setPriority(priority)
+                }  else {
+                    centerXAnchor.constraint(equalTo: anchorX, constant: padding).addIdAndActive(identifier).setPriority(priority)
                 }
             case .grater:
                 if identifier.lowercased().contains("left") {
-                    leftAnchor.constraint(greaterThanOrEqualTo: anchorY, constant: padding).addIdAndActive(identifier).setPriority(priority)
-                } else {
-                    rightAnchor.constraint(greaterThanOrEqualTo: anchorY, constant: padding).addIdAndActive(identifier).setPriority(priority)
+                    leftAnchor.constraint(greaterThanOrEqualTo: anchorX, constant: padding).addIdAndActive(identifier).setPriority(priority)
+                } else if identifier.lowercased().contains("right") {
+                    rightAnchor.constraint(equalTo: anchorX, constant: padding).addIdAndActive(identifier).setPriority(priority)
+                }  else {
+                    centerXAnchor.constraint(greaterThanOrEqualTo: anchorX, constant: padding).addIdAndActive(identifier).setPriority(priority)
                 }
             case .less:
                 if identifier.lowercased().contains("left") {
-                    leftAnchor.constraint(lessThanOrEqualTo: anchorY, constant: padding).addIdAndActive(identifier).setPriority(priority)
-                } else {
-                    rightAnchor.constraint(lessThanOrEqualTo: anchorY, constant: padding).addIdAndActive(identifier).setPriority(priority)
+                    leftAnchor.constraint(lessThanOrEqualTo: anchorX, constant: padding).addIdAndActive(identifier).setPriority(priority)
+                } else if identifier.lowercased().contains("right") {
+                    rightAnchor.constraint(equalTo: anchorX, constant: padding).addIdAndActive(identifier).setPriority(priority)
+                }  else {
+                    centerXAnchor.constraint(lessThanOrEqualTo: anchorX, constant: padding).addIdAndActive(identifier).setPriority(priority)
                 }
             }
         } else if let anchorDimession = anchor as? NSLayoutDimension {
@@ -142,6 +165,18 @@ extension UIView {
                     }
                 }
             }
+        }
+    }
+    
+    func makeConstCenterX(_ centerX: NSLayoutXAxisAnchor?, _ padding: CGFloat = 0, _ symbol: Symbol? = .equal, priority: Float? = nil) {
+        if let centerX = centerX {
+            setConst("constCenterX", centerX, padding, symbol ?? .equal, priority)
+        }
+    }
+    
+    func makeConstCenterY(_ centerY: NSLayoutYAxisAnchor?, _ padding: CGFloat = 0, _ symbol: Symbol? = .equal, priority: Float? = nil) {
+        if let centerY = centerY {
+            setConst("constCenterY", centerY, padding, symbol ?? .equal, priority)
         }
     }
     

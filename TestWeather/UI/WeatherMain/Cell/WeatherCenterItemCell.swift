@@ -13,8 +13,10 @@ class WeatherCenterItemCell: UICollectionViewCell {
     @IBOutlet weak var ivWeather: UIImageView!
     @IBOutlet weak var lbTemp: UILabel!
     
-    func configuration() {
-        
+    func configuration(item: WeatherCenterModel, index: Int) {
+        self.lbTime.text = item.displayTime(index: index)
+        self.lbTemp.text = item.temp
+        self.ivWeather.imageFromURL(strURL: item.icon, contentMode: UIView.ContentMode.scaleAspectFill)
     }
 }
 

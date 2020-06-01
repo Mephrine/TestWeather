@@ -11,14 +11,14 @@ import Foundation
 class CallAPI {
     fileprivate enum path {
         case currentWeather(lat: String, lon: String)
-        case weather5Days(lat: String, lon: String)
+        case daysWeather(lat: String, lon: String)
         case currentWeatherCity(cityNm: String)
         
         private var strUrl: String {
             switch self {
             case .currentWeather(_, _), .currentWeatherCity(_):
                 return "\(API_DOMAIN)/weather"
-            case .weather5Days(_, _):
+            case .daysWeather(_, _):
                 return "\(API_DOMAIN)/forecast"
             }
         }
@@ -30,7 +30,7 @@ class CallAPI {
                 return ["lat": lat, "lon": lon, "appid": API_KEY, "lang": "kr"]
             case .currentWeatherCity(let cityNm):
                 return ["q": cityNm, "appid": API_KEY, "lang": "kr"]
-            case .weather5Days(let lat, let lon):
+            case .daysWeather(let lat, let lon):
             return ["lat": lat, "lon": lon, "appid": API_KEY, "lang": "kr"]
             }
         }
@@ -97,6 +97,39 @@ class CallAPI {
             }
         }
     }
+    
+    func getDaysWeather(lat: String, lon: String, _ completion: @escaping (Result<DaysWeather, APIError>) -> Void) {
+        guard let url = URL(string: path.daysWeather(lat: lat, lon: lon).pathURL) else {
+            p("getCurrentWeather error")
+            DispatchQueue.main.async {
+                completion(.failure(.erroURL))
+            }
+            return
+        }
+        
+        let loadAPI = API<DaysWeather>(url)
+        
+        session.load(loadAPI) { resultData, success in
+            p("getCurrentWeather result : \(String(describing: resultData))")
+            guard let data = resultData else {
+                DispatchQueue.main.async {
+                    completion(.failure(.noData))
+                }
+                return
+            }
+            
+            if !success {
+                DispatchQueue.main.async {
+                    completion(.failure(.network))
+                }
+                return
+            }
+            
+            DispatchQueue.main.async {
+                completion(.success(data))
+            }
+        }
+    }
 }
 
 struct API<T> {
@@ -107,6 +140,7 @@ struct API<T> {
 extension API where T: Decodable {
     init(_ url: URL) {
         self.request = URLRequest(url: url)
+        p("request API : \(request.url?.absoluteString ?? "")")
         self.data = {
             try? JSONDecoder().decode(T.self, from: $0)
         }

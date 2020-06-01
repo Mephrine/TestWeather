@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WeatherListCell: UITableViewCell {
+class WeatherListCell: BaseTableViewCell {
     @IBOutlet weak var lbCity: UILabel!
     @IBOutlet weak var lbTemp: UILabel!
     

@@ -21,6 +21,7 @@ class WeatherVC: BaseVC {
     
     // variable
     private var weather: Weather?
+    private var daysWeather: DaysWeather?
     
     private var currentLat: Double = 0.0
     private var currentLon: Double = 0.0
@@ -60,6 +61,8 @@ class WeatherVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        Utils.SAFE_AREA_TOP = self.safeAreaTopAnchor
+        
         // API
         if let item = Utils.indexOfLocation(index: Utils.selectedIndexOfLocation()) {
             self.requestWeather(item.lat, item.lon)
@@ -82,14 +85,15 @@ class WeatherVC: BaseVC {
         cvWeather.dataSource = self
         cvWeather.backgroundColor = .clear
         cvWeather.contentInsetAdjustmentBehavior = .never
-        cvWeather.alwaysBounceVertical = true
-        cvWeather.bounces = true
+        cvWeather.alwaysBounceVertical = false
+        cvWeather.bounces = false
         
-        if let flowLayout = cvWeather.collectionViewLayout as? UICollectionViewFlowLayout {
+        if let flowLayout = cvWeather.collectionViewLayout as? HeaderFlowLayout {
             flowLayout.minimumInteritemSpacing = 0.0
             flowLayout.minimumLineSpacing      = 0
             flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            flowLayout.estimatedItemSize = CGSize.init(width: cvWeather.frame.width, height: cvWeather.frame.height)
+//            flowLayout.itemSize = UICollectionViewFlowLayout.automaticSize
+            flowLayout.estimatedItemSize = CGSize.init(width: cvWeather.frame.size.width, height: cvWeather.frame.size.height)
         }
         
         cvWeather.register(UINib(nibName:headerView, bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerView)
@@ -107,15 +111,45 @@ class WeatherVC: BaseVC {
         self.currentLat = lat
         self.currentLon = lon
         
+        LoadingView.shared.show()
         CallAPI.shared.getCurrentWeather(lat: lat.toDecimal, lon: lon.toDecimal) { [weak self] result in
             switch result {
             case .success(let weather):
                 self?.weather = weather
-                self?.cvWeather.reloadData()
+                if let firstModel = Utils.unarchiveWeatherList()?.first {
+                    if firstModel.city.isEmpty {
+                        Utils.updateLocation(cityNm: weather.name ?? "", latitude: lat, longitude: lon)
+                    }
+                }
+                LoadingView.shared.hide {
+                    self?.cvWeather.reloadData()
+                }
                 break
             case .failure(let error):
-                if error != .noData {
-                    CommonAlert.showAlert(vc: self, message: error.desc ?? "")
+                LoadingView.shared.hide {
+                    if error != .noData {
+                        CommonAlert.showAlert(vc: self, message: error.desc ?? "")
+                    }
+                }
+                
+                break
+            }
+        }
+        
+        LoadingView.shared.show()
+        CallAPI.shared.getDaysWeather(lat: lat.toDecimal, lon: lon.toDecimal) { [weak self] result in
+            switch result {
+            case .success(let daysWeather):
+                self?.daysWeather = daysWeather
+                LoadingView.shared.hide {
+                    self?.cvWeather.reloadData()
+                }
+                break
+            case .failure(let error):
+                LoadingView.shared.hide {
+                    if error != .noData {
+                        CommonAlert.showAlert(vc: self, message: error.desc ?? "")
+                    }
                 }
                 break
             }
@@ -175,8 +209,11 @@ extension WeatherVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerView, for: indexPath)
         
-        if let headerView = header as? WeatherHeaderView, let data = weather {
-            headerView.configuration(item: WeatherHeaderModel(data))
+        if let headerView = header as? WeatherHeaderView, let data = weather, let list = daysWeather {
+            headerView.configuration(item: WeatherHeaderModel(data), list: list)
+            if let flowLayout = collectionView.collectionViewLayout as? HeaderFlowLayout {
+                flowLayout.delegate = headerView as HeaderFlowLayoutScrollDelegate
+            }
         }
         
         return header
@@ -185,7 +222,7 @@ extension WeatherVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height)
     }
-    //
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.size.width, height: 450)
     }
@@ -196,10 +233,8 @@ extension WeatherVC  {
     
     func weekCell(_ collectionView: UICollectionView, cellForRowAt indexPath: IndexPath) -> WeatherWeekCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: weekCell, for: indexPath) as! WeatherWeekCell
-        if let model = weather {
-            let cellModel = WeatherWeekModel(model)
-            //            cell.configuration(item: cellModel)
-            cell.configuration()
+        if let model = daysWeather {
+            cell.configuration(item: model)
         }
         
         return cell
@@ -226,3 +261,4 @@ extension WeatherVC  {
     }
     
 }
+

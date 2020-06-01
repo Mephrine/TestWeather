@@ -43,6 +43,7 @@ class LocationVC: BaseVC {
             self.isChecking = false
             Utils.insertLocation(latitude: latitude, longitude: longitude)
             if let weatherVC = viewController(type: WeatherVC.self) {
+
                 self.navigationController?.setViewControllers([weatherVC], animated: true)
             }
         }

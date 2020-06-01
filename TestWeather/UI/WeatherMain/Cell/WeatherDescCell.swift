@@ -12,7 +12,7 @@ class WeatherDescCell: BaseCollectionViewCell {
     @IBOutlet weak var lbDesc: UILabel!
     
     func configuration(item: WeatherDescModel) {
-        lbDesc.text = "가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라가나다라"
+        self.lbDesc.text = item.desc
     }
 }
 

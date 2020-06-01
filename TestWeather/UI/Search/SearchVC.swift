@@ -38,6 +38,7 @@ class SearchVC: BaseVC {
         tableSearch.rowHeight = UITableView.automaticDimension
         tableSearch.separatorStyle = .singleLine
         tableSearch.backgroundColor = .white
+        tableSearch.keyboardDismissMode = .onDrag
         
         tableSearch.tableHeaderView = searchController.searchBar
         
@@ -53,6 +54,7 @@ class SearchVC: BaseVC {
         searchController.searchBar.placeholder = STR_SEARCH_PLACEHOLDER
         searchController.searchBar.searchBarStyle = .prominent
         searchController.searchBar.sizeToFit()
+        searchController.searchBar.setShowsCancelButton(true, animated: true)
         searchController.obscuresBackgroundDuringPresentation = false
         
         definesPresentationContext = true
@@ -62,8 +64,18 @@ class SearchVC: BaseVC {
         searchController.searchBar.becomeFirstResponder()
     }
     
+    func validation(_ cityNm: String) -> Bool {
+        if let list = Utils.unarchiveWeatherList() {
+            if list.filter({ $0.city == cityNm }).count == 0 {
+                return true
+            }
+        }
+        return false
+    }
+    
     //MARK: - Action
     @objc func finishFlow() {
+        self.searchController.isActive = false
         self.dismiss(animated: true)
     }
     
@@ -123,10 +135,14 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
                 p("result : response : \(response)")
                 let item = response.mapItems.first
                 if let coordinate = item?.placemark.location?.coordinate, let name = item?.name {
-                    Utils.insertLocation(cityNm: name, latitude: coordinate.latitude, longitude: coordinate.longitude)
-                    
-                    self.resultsHandler?()
-                    self.finishFlow()
+                    if self.validation(name) {
+                        Utils.insertLocation(cityNm: name, latitude: coordinate.latitude, longitude: coordinate.longitude)
+                        
+                        self.resultsHandler?()
+                        self.finishFlow()
+                    } else {
+                        self.finishFlow()
+                    }
                 }
             }
         }

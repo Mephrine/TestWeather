@@ -14,8 +14,11 @@ class WeatherWeekItemCell: BaseTableViewCell {
     @IBOutlet weak var lbLowTemp: UILabel!
     @IBOutlet weak var ivIcon: UIImageView!
     
-    func configuration() {
-        
+    func configuration(item: WeatherWeekModel) {
+        self.lbDay.text = item.day
+        self.lbHighTemp.text = item.highTemp
+        self.lbLowTemp.text = item.lowTemp
+        self.ivIcon.imageFromURL(strURL: item.icon, contentMode: UIView.ContentMode.scaleAspectFill)
     }
 }
 

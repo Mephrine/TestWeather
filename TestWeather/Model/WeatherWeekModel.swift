@@ -15,19 +15,19 @@ struct WeatherWeekModel {
         self.item = weather
     }
     
-    var icon: URL? {
-        return item.weather?.first?.icon
+    var icon: String {
+        return item.weather?.first?.icon ?? ""
     }
     
     var day: String {
-        return ""
+        return item.dt?.millsToDate().weekDayStr() ?? ""
     }
     
-    var highTemp: Double {
-        return item.main?.tempMax ?? 0.0
+    var highTemp: String {
+        return (item.main?.tempMax ?? 0.0).toCelsius
     }
     
-    var lowTemp: Double {
-        return item.main?.tempMin ?? 0.0
+    var lowTemp: String {
+        return (item.main?.tempMin ?? 0.0).toCelsius
     }
 }
