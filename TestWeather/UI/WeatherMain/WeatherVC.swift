@@ -14,8 +14,6 @@ class WeatherVC: BaseVC {
     @IBOutlet weak var ivBg: UIImageView!
     
     // Cell Resuable  Identifier
-//    private let headerCell      = "WeatherHeaderCell"
-//    private let centerCell      = "WeatherCenterCell"
     private let headerView      = "WeatherHeaderView"
     private let weekCell        = "WeatherWeekCell"
     private let descCell        = "WeatherDescCell"
@@ -84,7 +82,8 @@ class WeatherVC: BaseVC {
         cvWeather.dataSource = self
         cvWeather.backgroundColor = .clear
         cvWeather.contentInsetAdjustmentBehavior = .never
-        
+        cvWeather.alwaysBounceVertical = true
+        cvWeather.bounces = true
         
         if let flowLayout = cvWeather.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.minimumInteritemSpacing = 0.0
@@ -162,15 +161,15 @@ extension WeatherVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.row {
-                case 0:
-                    return weekCell(collectionView, cellForRowAt: indexPath)
-                case 1:
-                    return descCell(collectionView, cellForRowAt: indexPath)
-                case 2:
-                    return currentInfoCell(collectionView, cellForRowAt: indexPath)
-                default:
-                    return UICollectionViewCell()
-                }
+        case 0:
+            return weekCell(collectionView, cellForRowAt: indexPath)
+        case 1:
+            return descCell(collectionView, cellForRowAt: indexPath)
+        case 2:
+            return currentInfoCell(collectionView, cellForRowAt: indexPath)
+        default:
+            return UICollectionViewCell()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -186,11 +185,11 @@ extension WeatherVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height)
     }
-//
+    //
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.size.width, height: 450)
     }
-
+    
 }
 
 extension WeatherVC  {
@@ -199,7 +198,7 @@ extension WeatherVC  {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: weekCell, for: indexPath) as! WeatherWeekCell
         if let model = weather {
             let cellModel = WeatherWeekModel(model)
-//            cell.configuration(item: cellModel)
+            //            cell.configuration(item: cellModel)
             cell.configuration()
         }
         

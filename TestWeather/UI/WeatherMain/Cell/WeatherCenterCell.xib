@@ -23,9 +23,8 @@
                             <constraint firstAttribute="height" constant="1" id="bLr-vK-knr"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" id="iN0-l3-epB">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="IBc-PO-sUb">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
@@ -55,9 +54,13 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="NVN-Fr-B95" firstAttribute="top" secondItem="WtL-J1-hNy" secondAttribute="top" id="0LO-RI-v31"/>
+                    <constraint firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="BHS-du-GgM"/>
+                    <constraint firstItem="iN0-l3-epB" firstAttribute="top" secondItem="WtL-J1-hNy" secondAttribute="top" id="GQk-I5-0dC"/>
                     <constraint firstAttribute="trailing" secondItem="NVN-Fr-B95" secondAttribute="trailing" id="TZn-m3-6G5"/>
                     <constraint firstAttribute="trailing" secondItem="P25-SM-eac" secondAttribute="trailing" id="aQs-Fz-TsL"/>
                     <constraint firstItem="NVN-Fr-B95" firstAttribute="leading" secondItem="WtL-J1-hNy" secondAttribute="leading" id="fNL-Xa-yHA"/>
+                    <constraint firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="i8G-xp-L6j"/>
+                    <constraint firstItem="iN0-l3-epB" firstAttribute="leading" secondItem="WtL-J1-hNy" secondAttribute="leading" id="lAd-7m-wZR"/>
                     <constraint firstAttribute="bottom" secondItem="P25-SM-eac" secondAttribute="bottom" id="lQC-4w-y1X"/>
                     <constraint firstItem="P25-SM-eac" firstAttribute="leading" secondItem="WtL-J1-hNy" secondAttribute="leading" id="leM-I7-pdU"/>
                 </constraints>

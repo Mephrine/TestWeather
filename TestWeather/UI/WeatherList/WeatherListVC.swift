@@ -19,7 +19,7 @@ class WeatherListVC: BaseVC {
     var resultsHandler: ((Double, Double) -> Void)?
     
     // e.g.
-    private var cityList = Defaults.array(forKey: UD_REGI_LOCATION_LIST) as? [WeatherListModel]
+    private var cityList = Utils.unarchiveWeatherList()
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
@@ -46,7 +46,7 @@ class WeatherListVC: BaseVC {
         // SearchViewController 실행하기.
         if let searchVC = viewController(storyboard: "Main", type: SearchVC.self) {
             searchVC.resultsHandler = { [weak self] in
-                self?.cityList = Defaults.array(forKey: UD_REGI_LOCATION_LIST) as? [WeatherListModel]
+                self?.cityList = Utils.unarchiveWeatherList()
                 self?.tableList.reloadData()
             }
         

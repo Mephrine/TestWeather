@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let navigation = UINavigationController()
         navigation.setNavigationBarHidden(true, animated: false)
-        if (Defaults.array(forKey: UD_REGI_LOCATION_LIST)?.count) ?? 0 > 0 {
+        if (Utils.unarchiveWeatherList()?.count) ?? 0 > 0 {
             if let weatherVC = viewController(type: WeatherVC.self) {
                 navigation.setViewControllers([weatherVC], animated: false)
             }

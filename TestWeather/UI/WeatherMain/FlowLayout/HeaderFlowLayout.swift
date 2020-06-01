@@ -21,7 +21,6 @@ class HeaderFlowLayout: UICollectionViewFlowLayout {
                 if let cv = collectionView {
                     // 스크롤 관련 처리.
                     let offsetY = cv.contentOffset.y
-                    p("offsetY : \(offsetY) | \($0.frame.height) | \($0.frame.height)")
                     
                     if offsetY > MAX_HEIGHT {
                         $0.frame = CGRect.init(x: 0, y: offsetY, width: cv.frame.size.width, height: $0.frame.height - MAX_HEIGHT)

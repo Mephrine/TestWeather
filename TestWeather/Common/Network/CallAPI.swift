@@ -20,8 +20,6 @@ class CallAPI {
                 return "\(API_DOMAIN)/weather"
             case .weather5Days(_, _):
                 return "\(API_DOMAIN)/forecast"
-            default:
-                return ""
             }
         }
         
@@ -34,8 +32,6 @@ class CallAPI {
                 return ["q": cityNm, "appid": API_KEY, "lang": "kr"]
             case .weather5Days(let lat, let lon):
             return ["lat": lat, "lon": lon, "appid": API_KEY, "lang": "kr"]
-            default :
-                return nil
             }
         }
         
