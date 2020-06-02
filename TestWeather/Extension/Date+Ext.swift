@@ -161,7 +161,6 @@ extension Date {
         df.dateFormat = format
         df.timeZone = Utils.currentTimeZone()
         df.locale = Locale.init(identifier: "ko")
-        p("self : \(self) | \(df.string(from: self))")
         
         return df.string(from: self)
     }
