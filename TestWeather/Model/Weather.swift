@@ -8,10 +8,22 @@
 
 import Foundation
 
+/**
+ # (S) DaysWeather.swift
+ - Author: Mephrine
+ - Date: 20.05.28
+ - Note: 날씨 API 최상단 모델의 리스트를 담은 구조체
+*/
 struct DaysWeather: Codable {
     let list: [Weather]?
 }
 
+/**
+ # (S) Weather.swift
+ - Author: Mephrine
+ - Date: 20.05.28
+ - Note: 날씨 API 최상단 모델
+*/
 struct Weather: Codable {
     let main: WeatherMain?
     let weather: [WeatherSub]?
@@ -25,6 +37,7 @@ struct Weather: Codable {
     let name: String?
     let city: City?
     let dtTxt: String
+    let timezone: Int?
     
     enum CodingKeys: String, CodingKey {
         case main = "main"
@@ -39,6 +52,7 @@ struct Weather: Codable {
         case name = "name"
         case city = "city"
         case dtTxt = "dt_txt"
+        case timezone = "timezone"
     }
     
     init(from decoder: Decoder) throws {
@@ -55,9 +69,16 @@ struct Weather: Codable {
         self.name = (try? values.decode(String.self, forKey: .name))
         self.city = (try? values.decode(City.self, forKey: .city))
         self.dtTxt = (try? values.decode(String.self, forKey: .dtTxt)) ?? ""
+        self.timezone = (try? values.decode(Int.self, forKey: .timezone))
     }
 }
 
+/**
+ # (S) WeatherMain.swift
+ - Author: Mephrine
+ - Date: 20.05.28
+ - Note: 날씨 API main 모델
+*/
 struct WeatherMain: Codable {
     let humidity: Double
     let pressure: Double
@@ -86,7 +107,14 @@ struct WeatherMain: Codable {
     }
 }
 
+/**
+ # (S) WeatherMain.swift
+ - Author: Mephrine
+ - Date: 20.05.28
+ - Note: 날씨 API weather 모델
+*/
 struct WeatherSub: Codable {
+    let id: Int?
     let main: String?
     let description: String?
     let icon: String?
@@ -95,11 +123,13 @@ struct WeatherSub: Codable {
         case main = "main"
         case description = "description"
         case icon = "icon"
+        case id = "id"
     }
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         
+        self.id = (try? values.decode(Int.self, forKey: .id)) ?? 0
         self.main = (try? values.decode(String.self, forKey: .main)) ?? ""
         self.description = (try? values.decode(String.self, forKey: .description)) ?? ""
         let strIcon = (try? values.decode(String.self, forKey: .icon)) ?? ""
@@ -107,6 +137,12 @@ struct WeatherSub: Codable {
     }
 }
 
+/**
+ # (S) Fall.swift
+ - Author: Mephrine
+ - Date: 20.05.28
+ - Note: 날씨 API rain, snow 모델
+*/
 struct Fall: Codable {
     let hourOne: Double?
     let hourThree: Double?
@@ -118,27 +154,51 @@ struct Fall: Codable {
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        self.hourOne = (try? values.decode(Double.self, forKey: .hourOne)) ?? 0.0
-        self.hourThree = (try? values.decode(Double.self, forKey: .hourThree)) ?? 0.0
+        self.hourOne = (try? values.decode(Double.self, forKey: .hourOne))
+        self.hourThree = (try? values.decode(Double.self, forKey: .hourThree))
     }
 }
 
+/**
+ # (S) Wind.swift
+ - Author: Mephrine
+ - Date: 20.05.28
+ - Note: 날씨 API wind 모델
+*/
 struct Wind: Codable {
     let speed: Double?
     let deg: Double?
 }
 
+/**
+ # (S) Clouds.swift
+ - Author: Mephrine
+ - Date: 20.05.28
+ - Note: 날씨 API cloud 모델
+*/
 struct Clouds: Codable {
     let all: Double?
     
 }
 
+/**
+ # (S) WeatherSys.swift
+ - Author: Mephrine
+ - Date: 20.05.28
+ - Note: 날씨 API sys 모델
+*/
 struct WeatherSys: Codable {
     let country: String?
     let sunrise: Double?
     let sunset: Double?
 }
 
+/**
+ # (S) City.swift
+ - Author: Mephrine
+ - Date: 20.05.28
+ - Note: 날씨 API city 모델
+*/
 struct City: Codable {
     let country: String?
     let sunrise: Double?

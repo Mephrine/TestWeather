@@ -9,16 +9,19 @@
 import Foundation
 
 extension Date {
+    
+    // 날짜 계산은 UTC. 보여줄 때는 해당 타임존으로.
     var calendar: Calendar {
         var calendar = Calendar.current
         calendar.timeZone = TimeZone(identifier: "UTC")!
+        calendar.locale = Locale.init(identifier: "ko")
         return calendar
     }
     
     var calendarAuto: Calendar {
         var calendar = Calendar.current
-        calendar.timeZone = TimeZone(secondsFromGMT: -9 * 60 * 60)!
-        
+        calendar.timeZone = Utils.currentTimeZone()
+        calendar.locale = Locale.init(identifier: "ko")
         return calendar
     }
     
@@ -47,7 +50,8 @@ extension Date {
     func fromFormat(_ format: String) -> (String) -> Date? {
         let df = DateFormatter()
         df.dateFormat = format
-        df.timeZone = TimeZone.init(abbreviation: "UTC")
+        df.timeZone = Utils.currentTimeZone()
+        df.locale = Locale.init(identifier: "ko")
         return { dateString in
             guard !dateString.isEmpty else { return nil }
             return df.date(from: dateString)
@@ -61,9 +65,8 @@ extension Date {
     
     /// 요일 반환
     func weekDayStr() -> String {
-        
         let units: Set<Calendar.Component> = [.weekday]
-        let comps = self.calendar.dateComponents(units, from: self)
+        let comps = self.calendarAuto.dateComponents(units, from: self)
         
         if let value = comps.weekday {
             switch value {
@@ -86,6 +89,13 @@ extension Date {
             }
         }
         return "일요일"
+    }
+    
+    func toHourStr() -> Int {
+        let units: Set<Calendar.Component> = [.hour]
+        let comps = self.calendarAuto.dateComponents(units, from: self)
+        
+        return comps.hour ?? -9
     }
     
     // 두 날짜간 비교해서 과거/현재/미래 체크.
@@ -141,14 +151,17 @@ extension Date {
     func dateToString(date: Date, _ format: String = "yyyy-MM-dd") -> String {
         let df = DateFormatter()
         df.dateFormat = format
-        df.timeZone = TimeZone.autoupdatingCurrent
+        df.timeZone = Utils.currentTimeZone()
+        df.locale = Locale.init(identifier: "ko")
         return df.string(from: date)
     }
     
     func formatted(_ format: String) -> String {
         let df = DateFormatter()
         df.dateFormat = format
-        df.timeZone = TimeZone(identifier: "UTC")!
+        df.timeZone = Utils.currentTimeZone()
+        df.locale = Locale.init(identifier: "ko")
+        p("self : \(self) | \(df.string(from: self))")
         
         return df.string(from: self)
     }
@@ -156,8 +169,9 @@ extension Date {
     /// 스트링 변환 : 날짜 포멧
     func toString(_ format:String, am:String? = nil, pm:String? = nil)-> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(abbreviation: "GMT+0:00")
+        dateFormatter.timeZone = Utils.currentTimeZone()
         dateFormatter.dateFormat = format
+        dateFormatter.locale = Locale.init(identifier: "ko")
         
         if let amSymbol = am {
             dateFormatter.amSymbol = amSymbol
@@ -170,36 +184,20 @@ extension Date {
     }
     
     // 날짜 변환 : 날짜 포멧
-    func toDateKoreaTime()-> Date {
+    func toDateCurrentTime(format: String = "yyyyMMddHHmmssSSS")-> Date {
         
         var today = Date()
-        let format = "yyyyMMddHHmmssSSS"
+        let format = format
         let date = self.toString(format)
         let formatter = DateFormatter()
         formatter.dateFormat = format
-        formatter.timeZone = TimeZone(secondsFromGMT: -9 * 60 * 60)
+        formatter.timeZone = Utils.currentTimeZone()
         if let value = formatter.date(from:date) {
             today = value
         }
         
         return today
     }
-    
-    func toDateUTCTime()-> Date {
-        
-        var today = Date()
-        let format = "yyyyMMddHHmmss"
-        let date = self.toString(format)
-        let formatter = DateFormatter()
-        formatter.dateFormat = format
-        formatter.timeZone = TimeZone(secondsFromGMT: +9 * 60 * 60)
-        if let value = formatter.date(from:date) {
-            today = value
-        }
-        
-        return today
-    }
-    
     func currentMillis() -> Int64 {
         return Int64(self.timeIntervalSince1970 * 1000)
     }

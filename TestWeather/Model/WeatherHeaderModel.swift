@@ -8,6 +8,12 @@
 
 import Foundation
 
+/**
+ # (S) WeatherHeaderModel.swift
+ - Author: Mephrine
+ - Date: 20.05.30
+ - Note: WeatherVC내 CollectionView 헤더뷰 상단에서 사용될 데이터 모델
+*/
 struct WeatherHeaderModel {
     private var item: Weather
     
@@ -32,7 +38,6 @@ struct WeatherHeaderModel {
         let sunrise = item.sys?.sunrise ?? 0
         let sunset = item.sys?.sunset ?? 0
         
-        p("dt : \(dt) | \(sunrise) | \(sunset)")
         // 오늘 | 야간 2개로만 설정.
         if sunrise > dt || dt > sunset {
             return "야간"
@@ -42,7 +47,7 @@ struct WeatherHeaderModel {
     }
     
     var day: String {
-        return item.dt?.millsToDate().weekDayStr() ?? ""
+        return Date().weekDayStr()
     }
     
     var highTemp: String {

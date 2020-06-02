@@ -12,9 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {        
         // Light모드로만 진행
         if #available(iOS 13.0, *) {
             self.window?.overrideUserInterfaceStyle = .light
@@ -22,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let navigation = UINavigationController()
         navigation.setNavigationBarHidden(true, animated: false)
+        
+        // 최초 접근 시, LocationVC에서 현재 위치정보를 얻어서 API 조회
         if (Utils.unarchiveWeatherList()?.count) ?? 0 > 0 {
             if let weatherVC = viewController(type: WeatherVC.self) {
                 navigation.setViewControllers([weatherVC], animated: false)

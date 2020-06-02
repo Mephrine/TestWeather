@@ -8,6 +8,12 @@
 
 import Foundation
 
+/**
+ # (S) WeatherDescModel.swift
+ - Author: Mephrine
+ - Date: 20.05.30
+ - Note: WeatherVC내 CollectionView desc Cell에서 사용될 데이터 모델
+*/
 struct WeatherDescModel {
     private var item: Weather
     

@@ -8,6 +8,12 @@
 
 import Foundation
 
+/**
+ # (S) WeatherCurrentInfoModel.swift
+ - Author: Mephrine
+ - Date: 20.05.30
+ - Note: WeatherVC내 CollectionView currentInfo Cell에서 사용될 데이터 모델
+*/
 struct WeatherCurrentInfoModel {
     private var item: Weather
     
@@ -22,15 +28,24 @@ struct WeatherCurrentInfoModel {
     var sunset: String {
         return item.sys?.sunset?.millsToDate().formatted("a h:mm") ?? ""
     }
-    
-    var chanceRain: String {
-        if let chance = item.rain?.hourOne {
-            return "\(chance)cm"
-        } else if let chance = item.rain?.hourThree {
-            return "\(chance)cm"
-        }
-        return "0cm"
-    }
+
+    var fallRain: String {
+           if let fall = item.rain?.hourOne {
+               return String(format:"%.1f", fall) + "mm"
+           } else if let fall = item.rain?.hourThree {
+               return  String(format:"%.1f", fall) + "mm"
+           }
+           return "0mm"
+       }
+       
+       var fallSnow: String {
+           if let fall = item.snow?.hourOne {
+               return String(format:"%.1f", fall) + "mm"
+           } else if let fall = item.snow?.hourThree {
+               return  String(format:"%.1f", fall) + "mm"
+           }
+           return "0mm"
+       }
     
     var humidity: String {
         return "\(item.main?.humidity ?? 0)%"

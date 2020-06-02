@@ -8,6 +8,12 @@
 
 import UIKit
 
+/**
+ # (C) WeatherWeekItemCell.swift
+ - Author: Mephrine
+ - Date: 20.05.29
+ - Note: 날씨뷰컨트롤러의 UICollectionView의 week Cell내 UITableView의 Cell
+*/
 class WeatherWeekItemCell: BaseTableViewCell {
     @IBOutlet weak var lbDay: UILabel!
     @IBOutlet weak var lbHighTemp: UILabel!

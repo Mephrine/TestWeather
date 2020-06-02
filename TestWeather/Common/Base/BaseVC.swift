@@ -8,6 +8,12 @@
 
 import UIKit
 
+/**
+ # (C) BaseVC.swift
+ - Author: Mephrine
+ - Date: 20.05.28
+ - Note: 모든 뷰컨트롤러가 상속받는 부모
+*/
 class BaseVC: UIViewController {
     // 클래스 이름만 체크하는 용도
     lazy private(set) var classNm: String = {
@@ -27,26 +33,26 @@ class BaseVC: UIViewController {
         super.viewWillAppear(animated)
         
         // fix iOS 11 scroll view bug
-        if #available(iOS 11, *) {
-          if let scrollView = self.view.subviews.first as? UIScrollView {
-            self.scrollViewOriginalContentInsetAdjustmentBehaviorRawValue =
-              scrollView.contentInsetAdjustmentBehavior.rawValue
-            scrollView.contentInsetAdjustmentBehavior = .never
-          }
-        }
+//        if #available(iOS 11, *) {
+//          if let scrollView = self.view.subviews.first as? UIScrollView {
+//            self.scrollViewOriginalContentInsetAdjustmentBehaviorRawValue =
+//              scrollView.contentInsetAdjustmentBehavior.rawValue
+//            scrollView.contentInsetAdjustmentBehavior = .never
+//          }
+//        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         // fix iOS 11 scroll view bug
-        if #available(iOS 11, *) {
-          if let scrollView = self.view.subviews.first as? UIScrollView,
-            let rawValue = self.scrollViewOriginalContentInsetAdjustmentBehaviorRawValue,
-            let behavior = UIScrollView.ContentInsetAdjustmentBehavior(rawValue: rawValue) {
-            scrollView.contentInsetAdjustmentBehavior = behavior
-          }
-        }
+//        if #available(iOS 11, *) {
+//          if let scrollView = self.view.subviews.first as? UIScrollView,
+//            let rawValue = self.scrollViewOriginalContentInsetAdjustmentBehaviorRawValue,
+//            let behavior = UIScrollView.ContentInsetAdjustmentBehavior(rawValue: rawValue) {
+//            scrollView.contentInsetAdjustmentBehavior = behavior
+//          }
+//        }
         
         self.resetView()
     }

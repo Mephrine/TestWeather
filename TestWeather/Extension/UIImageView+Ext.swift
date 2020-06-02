@@ -27,8 +27,4 @@ extension UIImageView {
             }
         }
     }
-    
-    func setBg(_ item: Weather) {
-        // 
-    }
 }

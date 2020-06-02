@@ -12,13 +12,13 @@
         <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WeatherHeaderView" translatesAutoresizingMaskIntoConstraints="NO" id="YxR-66-8GM" customClass="WeatherHeaderView" customModule="TestWeather" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="450"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunny" translatesAutoresizingMaskIntoConstraints="NO" id="xED-TE-4gw">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xED-TE-4gw">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
                     <constraints>
                         <constraint firstAttribute="height" id="3YT-Od-0vO"/>
                     </constraints>
                 </imageView>
-                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KEK-6c-tSh">
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KEK-6c-tSh" userLabel="Dim">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="450"/>
                     <color key="backgroundColor" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
@@ -35,8 +35,8 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="오늘" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t6i-jL-UBm">
-                                    <rect key="frame" x="39" y="66" width="35" height="24"/>
-                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="20"/>
+                                    <rect key="frame" x="39" y="73" width="24.5" height="17"/>
+                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="14"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -75,13 +75,13 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Jf-5E-4gf">
                                     <rect key="frame" x="180.5" y="95.5" width="53.5" height="59"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Zx-5l-dJd">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="-" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Zx-5l-dJd">
                                             <rect key="frame" x="20" y="0.0" width="13.5" height="36"/>
                                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="30"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nff-Tc-24O">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nff-Tc-24O">
                                             <rect key="frame" x="23" y="39" width="7.5" height="20"/>
                                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -127,7 +127,7 @@
                                     </constraints>
                                 </view>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="0Em-ZZ-Uxd">
-                                    <rect key="frame" x="0.0" y="1" width="414" height="98"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kPP-uF-1zJ">
                                         <size key="itemSize" width="128" height="128"/>
@@ -150,11 +150,11 @@
                                 <constraint firstAttribute="trailing" secondItem="l90-QZ-J7e" secondAttribute="trailing" id="AC6-r8-bhc"/>
                                 <constraint firstItem="5rI-O7-fkk" firstAttribute="leading" secondItem="7Zy-lv-QKp" secondAttribute="leading" id="JjT-OO-CGk"/>
                                 <constraint firstItem="l90-QZ-J7e" firstAttribute="top" secondItem="7Zy-lv-QKp" secondAttribute="top" id="N2s-3x-jQx"/>
-                                <constraint firstItem="0Em-ZZ-Uxd" firstAttribute="top" secondItem="l90-QZ-J7e" secondAttribute="bottom" id="T45-ys-dE6"/>
                                 <constraint firstAttribute="trailing" secondItem="0Em-ZZ-Uxd" secondAttribute="trailing" id="TML-Ql-aWI"/>
                                 <constraint firstAttribute="trailing" secondItem="5rI-O7-fkk" secondAttribute="trailing" id="a7o-BX-qrq"/>
-                                <constraint firstItem="5rI-O7-fkk" firstAttribute="top" secondItem="0Em-ZZ-Uxd" secondAttribute="bottom" id="eQ0-Yv-1LF"/>
+                                <constraint firstAttribute="bottom" secondItem="0Em-ZZ-Uxd" secondAttribute="bottom" id="ldL-q2-eVU"/>
                                 <constraint firstItem="l90-QZ-J7e" firstAttribute="leading" secondItem="7Zy-lv-QKp" secondAttribute="leading" id="rnp-Vp-aGa"/>
+                                <constraint firstItem="0Em-ZZ-Uxd" firstAttribute="top" secondItem="7Zy-lv-QKp" secondAttribute="top" id="t5z-Ve-hpr"/>
                                 <constraint firstAttribute="height" constant="100" id="thb-9D-dqn"/>
                             </constraints>
                         </view>
@@ -188,8 +188,11 @@
             </constraints>
             <connections>
                 <outlet property="constBgH" destination="3YT-Od-0vO" id="ysI-fs-bIV"/>
+                <outlet property="constTopViewH" destination="xYb-qg-8Qr" id="7Z9-X1-ito"/>
                 <outlet property="constTopViewTop" destination="D4F-3c-C1c" id="NMg-eM-FJX"/>
                 <outlet property="cvHorizontalWeather" destination="0Em-ZZ-Uxd" id="W2c-Yo-IR9"/>
+                <outlet property="ivBg" destination="xED-TE-4gw" id="Qkj-fi-3hY"/>
+                <outlet property="ivDim" destination="KEK-6c-tSh" id="fp2-6k-fW6"/>
                 <outlet property="lbCity" destination="9Zx-5l-dJd" id="2kS-SF-Bvn"/>
                 <outlet property="lbDay" destination="2cR-jk-2hP" id="Prz-dD-ldv"/>
                 <outlet property="lbHighTemp" destination="CLy-Oi-OTa" id="9nV-bx-hqJ"/>
@@ -202,7 +205,4 @@
             <point key="canvasLocation" x="-432" y="-133"/>
         </collectionReusableView>
     </objects>
-    <resources>
-        <image name="sunny" width="540" height="960"/>
-    </resources>
 </document>

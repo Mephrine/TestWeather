@@ -16,11 +16,7 @@ extension Double {
     
     // 화씨 -> 섭씨로 변경
     var toCelsiusIncldeDegree: String {
-        var celsius = self
-        if celsius > 0 {
-            celsius -= 273.15
-        }
-        return String(format: "%.0f°", celsius)
+        return self.toCelsius + "°"
     }
     
     var toCelsius: String {
@@ -28,7 +24,8 @@ extension Double {
         if celsius > 0 {
             celsius -= 273.15
         }
-        return String(format: "%.0f", celsius)
+        let strCelsius = String(format: "%.0f", celsius)
+        return strCelsius == "-0" ? "0" : strCelsius
     }
     
     // 화씨로 사용
@@ -38,7 +35,7 @@ extension Double {
     
     // 기압
     var toPressure: String {
-        return "\(self)hPa"
+        return String(format: "%.0fhPa", self)
     }
     
     // 습도
@@ -48,10 +45,10 @@ extension Double {
     
     // 킬로미터
     var toKilioMeters: String {
-        return String(format: "%.2fkm", self / 1000.0)
+        return String(format: "%.1fkm", self / 1000.0)
     }
     
     func millsToDate() -> Date {
-        return Date(timeIntervalSince1970: (self / 1000.0))
+        return Date(timeIntervalSince1970: self)
     }
 }

@@ -17,6 +17,12 @@ public func p(_ items: Any...) {
 
 public let Defaults = UserDefaults.standard
 
+/**
+ # (C) Utils.swift
+ - Author: Mephrine
+ - Date: 20.05.29
+ - Note: 공통으로 사용되는 함수 및 변수 등을 정리해둔 클래스
+*/
 class Utils: NSObject {
     public static let SCREEN_WIDTH = UIScreen.main.bounds.size.width
     public static let SCREEN_HEIGHT = UIScreen.main.bounds.size.height
@@ -47,9 +53,9 @@ class Utils: NSObject {
         }
     }
     
-    static func insertLocation(cityNm: String? = "", latitude: Double, longitude: Double) {
+    static func insertLocation(cityNm: String? = "", timeZoneGMT: Int?, latitude: Double, longitude: Double) {
         var array = self.unarchiveWeatherList()
-        let model = WeatherListModel(lat: latitude, lon: longitude, city: cityNm ?? "")
+        let model = WeatherListModel(lat: latitude, lon: longitude, city: cityNm ?? "", timeZoneGMT: timeZoneGMT ?? 0)
         if array == nil {
             array = [WeatherListModel]()
         }
@@ -60,12 +66,12 @@ class Utils: NSObject {
         Defaults.synchronize()
     }
     
-    static func updateLocation(cityNm: String? = "", latitude: Double, longitude: Double) {
+    static func updateLocation(cityNm: String? = "", timeZoneGMT: Int?, latitude: Double, longitude: Double) {
         var array = self.unarchiveWeatherList()
         if let arrLocation = array {
             for (index, item) in arrLocation.enumerated() {
                 if item.lat == latitude && item.lon == longitude {
-                    let newModel = WeatherListModel(lat: latitude, lon: longitude, city: cityNm ?? "")
+                    let newModel = WeatherListModel(lat: latitude, lon: longitude, city: cityNm ?? "", timeZoneGMT: timeZoneGMT ?? 0)
                     array?[index] = newModel
                     let archive = self.archiveArray(array: array!)
                     Defaults.setValue(archive, forKey: UD_REGI_LOCATION_LIST)
@@ -75,6 +81,14 @@ class Utils: NSObject {
                 }
             }
         }
+    }
+    
+    static func currentTimeZone() -> TimeZone {
+        if let array = self.unarchiveWeatherList() {
+            let timeZoneGMT = array[selectedIndexOfLocation()].timeZoneGMT
+            return TimeZone(secondsFromGMT: timeZoneGMT) ?? TimeZone(identifier: "UTC")!
+        }
+        return TimeZone(identifier: "UTC")!
     }
     
     static func indexOfLocation(index: Int) -> WeatherListModel? {
@@ -91,10 +105,16 @@ class Utils: NSObject {
         let archive = self.archiveArray(array: array!)
         Defaults.setValue(archive, forKey: UD_REGI_LOCATION_LIST)
         Defaults.synchronize()
+        
+        // 인덱스 조정
+        var currentIndex = selectedIndexOfLocation()
+        if index < currentIndex {
+            currentIndex -= 1
+            setSelectedIndexOfLocation(index: currentIndex)
+        }
     }
     
     static func selectedIndexOfLocation() -> Int {
-        print("Defaults.integer(forKey: UD_CURRENT_LOCATION_INDEX) : \(Defaults.integer(forKey: UD_CURRENT_LOCATION_INDEX))")
         return Defaults.integer(forKey: UD_CURRENT_LOCATION_INDEX)
     }
     

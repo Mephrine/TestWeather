@@ -9,11 +9,17 @@
 import UIKit
 import MapKit
 
+/**
+ # (C) SearchVC.swift
+ - Author: Mephrine
+ - Date: 20.05.29
+ - Note: 도시등을 추가하기 위한 검색 용도의 뷰컨트롤러
+*/
 class SearchVC: BaseVC {
     @IBOutlet weak var tableSearch: UITableView!
     @IBOutlet weak var btnClose: UIButton!
     
-    var resultsHandler: (() -> Void)?
+    var resultsHandler: ((Bool) -> Void)?
     
     private var searchCompleter = MKLocalSearchCompleter()
     private var searchList = [MKLocalSearchCompletion]()
@@ -36,8 +42,8 @@ class SearchVC: BaseVC {
         tableSearch.dataSource = self
         tableSearch.estimatedRowHeight = 50
         tableSearch.rowHeight = UITableView.automaticDimension
-        tableSearch.separatorStyle = .singleLine
-        tableSearch.backgroundColor = .white
+        tableSearch.separatorStyle = .none
+        tableSearch.backgroundColor = .clear
         tableSearch.keyboardDismissMode = .onDrag
         
         tableSearch.tableHeaderView = searchController.searchBar
@@ -47,8 +53,15 @@ class SearchVC: BaseVC {
     }
     
     //MARK: - e.g.
+    /**
+     # setSearchController
+     - Author: Mephrine
+     - Date: 20.05.29
+     - Parameters:
+     - Returns:
+     - Note: SearchViewController를 설정하는 함수
+    */
     private func setSearchController() {
-        
         // SearchBar 네비게이션에 추가
         searchController.searchResultsUpdater = self
         searchController.searchBar.placeholder = STR_SEARCH_PLACEHOLDER
@@ -60,13 +73,31 @@ class SearchVC: BaseVC {
         definesPresentationContext = true
     }
     
+    /**
+     # focusSearchBar
+     - Author: Mephrine
+     - Date: 20.05.29
+     - Parameters:
+     - Returns:
+     - Note: SearchVC가 띄워진 후 searchBar에 포커스를 주는 함수
+    */
     func focusSearchBar() {
         searchController.searchBar.becomeFirstResponder()
     }
     
-    func validation(_ cityNm: String) -> Bool {
+    /**
+     # validation
+     - Author: Mephrine
+     - Date: 20.05.29
+     - Parameters:
+        - latitude : 위도
+        - longitude : 경도
+     - Returns: Bool
+     - Note: 검색한 결과가 이미 등록된 위경도 값 중에 동일한 값이 있는지 확인하는 함수
+    */
+    func validation(_ latitude: Double, _ longitude: Double) -> Bool {
         if let list = Utils.unarchiveWeatherList() {
-            if list.filter({ $0.city == cityNm }).count == 0 {
+            if list.filter({ $0.lat == latitude && $0.lon == longitude }).count == 0 {
                 return true
             }
         }
@@ -74,7 +105,17 @@ class SearchVC: BaseVC {
     }
     
     //MARK: - Action
-    @objc func finishFlow() {
+    /**
+     # finishFlow
+     - Author: Mephrine
+     - Date: 20.05.29
+     - Parameters:
+        - isSelected : 새로 추가된 값이 있는지에 대한 여부
+     - Returns:
+     - Note: SearchVC 를 종료하는 함수
+    */
+    @objc func finishFlow(_ isSelected: Bool = false) {
+        self.resultsHandler?(isSelected)
         self.searchController.isActive = false
         self.dismiss(animated: true)
     }
@@ -119,6 +160,9 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
             lbSearch.text = searchList[indexPath.row].title
         }
         
+        cell.selectionStyle = .none
+        cell.separatorInset = .zero
+        
         return cell
     }
     
@@ -132,14 +176,12 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
             }
             
             if let response = response {
-                p("result : response : \(response)")
                 let item = response.mapItems.first
-                if let coordinate = item?.placemark.location?.coordinate, let name = item?.name {
-                    if self.validation(name) {
-                        Utils.insertLocation(cityNm: name, latitude: coordinate.latitude, longitude: coordinate.longitude)
+                if let coordinate = item?.placemark.location?.coordinate, let name = item?.name, let timeZoneGMT = item?.timeZone?.secondsFromGMT() {
+                    if self.validation(coordinate.latitude, coordinate.longitude) {
+                        Utils.insertLocation(cityNm: name, timeZoneGMT: timeZoneGMT, latitude: coordinate.latitude, longitude: coordinate.longitude)
                         
-                        self.resultsHandler?()
-                        self.finishFlow()
+                        self.finishFlow(true)
                     } else {
                         self.finishFlow()
                     }

@@ -25,14 +25,20 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="high" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W8S-Dx-REs">
-                                <rect key="frame" x="358" y="10" width="36" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="W8S-Dx-REs">
+                                <rect key="frame" x="364" y="10" width="30" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="V4z-aM-Ab6"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="low" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9oP-bo-73c">
-                                <rect key="frame" x="308" y="10" width="30" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="9oP-bo-73c">
+                                <rect key="frame" x="314" y="10" width="30" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="kOf-hW-18i"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -53,9 +59,9 @@
                             <constraint firstAttribute="bottom" secondItem="W8S-Dx-REs" secondAttribute="bottom" constant="10" id="LsT-0t-HXV"/>
                             <constraint firstItem="asB-oI-K57" firstAttribute="centerY" secondItem="gFs-8q-ixR" secondAttribute="centerY" id="Ogl-e4-ha1"/>
                             <constraint firstAttribute="trailing" secondItem="W8S-Dx-REs" secondAttribute="trailing" constant="20" id="TCQ-Dh-2I3"/>
-                            <constraint firstItem="W8S-Dx-REs" firstAttribute="leading" secondItem="9oP-bo-73c" secondAttribute="trailing" constant="20" id="TWR-UW-YGj"/>
                             <constraint firstItem="9oP-bo-73c" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gFs-8q-ixR" secondAttribute="top" id="Tvf-bh-6H2"/>
                             <constraint firstAttribute="bottom" secondItem="ebz-jS-3Ym" secondAttribute="bottom" constant="10" id="YP3-dv-ifz"/>
+                            <constraint firstAttribute="trailing" secondItem="9oP-bo-73c" secondAttribute="trailing" constant="70" id="aqS-ff-yVY"/>
                             <constraint firstItem="asB-oI-K57" firstAttribute="centerX" secondItem="gFs-8q-ixR" secondAttribute="centerX" id="fgO-Dv-WbK"/>
                             <constraint firstItem="ebz-jS-3Ym" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gFs-8q-ixR" secondAttribute="top" id="tm9-m3-gLH"/>
                         </constraints>

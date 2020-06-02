@@ -8,6 +8,12 @@
 
 import UIKit
 
+/**
+ # (C) WeatherWeekCell.swift
+ - Author: Mephrine
+ - Date: 20.05.29
+ - Note: 날씨뷰컨트롤러의 UICollectionView의 week Cell
+*/
 class WeatherWeekCell: UICollectionViewCell {
     private let tableWeek: UITableView = { () -> UITableView in
         let tableWeek = UITableView.init(frame: CGRect.zero)
@@ -57,7 +63,8 @@ class WeatherWeekCell: UICollectionViewCell {
     func configuration(item: DaysWeather) {
         if let list = item.list {
             // 0시 기준으로만 뽑기
-            let filterList = list.filter{ $0.dtTxt.contains("00:00:00") }
+            let filterList = list.filter{ ($0.dt?.millsToDate().toHourStr() == 0) }
+            
             self.itemList = filterList
             self.tableWeek.reloadData()
         }

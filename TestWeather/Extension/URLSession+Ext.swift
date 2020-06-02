@@ -19,6 +19,7 @@ extension URLSession {
                 return
             }
             
+            // null값 제거를 위해 flatMap사용
             completion(data.flatMap(api.data), true)
         }.resume()
     }

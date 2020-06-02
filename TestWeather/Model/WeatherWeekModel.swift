@@ -8,6 +8,12 @@
 
 import Foundation
 
+/**
+ # (S) WeatherWeekModel.swift
+ - Author: Mephrine
+ - Date: 20.05.30
+ - Note: WeatherVC내 CollectionView week Cell에서 사용될 데이터 모델
+*/
 struct WeatherWeekModel {
     private var item: Weather
     

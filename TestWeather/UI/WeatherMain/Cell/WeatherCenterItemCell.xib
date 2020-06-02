@@ -36,11 +36,20 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OvD-OX-Jp1">
+                        <rect key="frame" x="39.5" y="22" width="0.0" height="0.0"/>
+                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="8"/>
+                        <color key="textColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="OvD-OX-Jp1" firstAttribute="centerX" secondItem="DFt-sQ-h3v" secondAttribute="centerX" id="32f-lN-qnZ"/>
+                    <constraint firstItem="sZs-To-W58" firstAttribute="top" relation="greaterThanOrEqual" secondItem="OvD-OX-Jp1" secondAttribute="bottom" id="6HS-I9-xPZ"/>
                     <constraint firstItem="FqP-C6-omL" firstAttribute="centerX" secondItem="DFt-sQ-h3v" secondAttribute="centerX" id="FPJ-ZR-cZF"/>
                     <constraint firstItem="1ri-qK-9FM" firstAttribute="centerX" secondItem="DFt-sQ-h3v" secondAttribute="centerX" id="GXh-MO-uZN"/>
                     <constraint firstItem="FqP-C6-omL" firstAttribute="top" secondItem="DFt-sQ-h3v" secondAttribute="top" constant="5" id="KEr-Jf-qaA"/>
+                    <constraint firstItem="OvD-OX-Jp1" firstAttribute="top" secondItem="FqP-C6-omL" secondAttribute="bottom" id="L2v-W6-3Ie"/>
                     <constraint firstItem="sZs-To-W58" firstAttribute="centerY" secondItem="DFt-sQ-h3v" secondAttribute="centerY" id="Wdp-gL-u0v"/>
                     <constraint firstAttribute="bottom" secondItem="1ri-qK-9FM" secondAttribute="bottom" constant="10" id="Zyx-ew-hlD"/>
                     <constraint firstItem="sZs-To-W58" firstAttribute="centerX" secondItem="DFt-sQ-h3v" secondAttribute="centerX" id="pQE-cA-sJM"/>
@@ -49,6 +58,7 @@
             <size key="customSize" width="79" height="110"/>
             <connections>
                 <outlet property="ivWeather" destination="sZs-To-W58" id="YaO-iR-Y0T"/>
+                <outlet property="lbFall" destination="OvD-OX-Jp1" id="roJ-DB-UmL"/>
                 <outlet property="lbTemp" destination="1ri-qK-9FM" id="OVb-Th-etW"/>
                 <outlet property="lbTime" destination="FqP-C6-omL" id="EB5-br-YSX"/>
             </connections>
